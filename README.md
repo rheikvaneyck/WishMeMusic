@@ -1,4 +1,4 @@
-lola
+WishMe Music
 ======
 
 Web based Wish-A-DJ Form  
