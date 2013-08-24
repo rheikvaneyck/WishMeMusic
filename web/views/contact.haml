@@ -1,0 +1,63 @@
+%form{ :action => "/kundendaten", :method => "post"}
+  %fieldset
+    %ol
+      %br
+      %li
+        %label{:for => "name"} Name * :
+        %input{:type => "text", :name => "name", :required => true}
+      %br           
+      %li
+        %label{:for => "email"} Email Adresse * :
+        %input{:type => "email", :name => "email", :required => true}
+      %br
+      %li
+        %label{:for => "tel"} Telefonnummer:
+        %input{:type => "tel", :name => "tel", :required => false}
+      %br
+      %br
+      %li
+        %label{:for => "datum"} Veranstaltungs Datum * :
+        %input{:type => "date", :name => "datum", :required => true}
+      %br
+      %li
+        %label{:for => "zeit"} Veranstaltungs Anfang:
+        %input{:type => "time", :name => "zeit"}
+      %br
+      %li
+        %label{:for => "strasse"} Veranstaltungs Ort, Straße:
+        %input{:type => "text", :name => "strasse"}
+      %br
+      %li
+        %label{:for => "stadt"} Veranstaltungs Ort Stadt:
+        %input{:type => "text", :name => "stadt"}
+      
+      %br
+      %br
+      %li
+        %label{:for => "gaeste"} Anzahl Gäste:
+        %input{:type => "number", :name => "anzahl", :value => "0"}
+      %br
+      %li
+        %label{:for => "unter20"} Anzahl der Gäste unter 20 Jahren:
+        %input{:type => "number", :name => "unter20", :value => "0"}
+      %br
+      %li
+        %label{:for => "ueber60"} Anzahl der Gäste über 60 Jahren:
+        %input{:type => "number", :name => "ueber60", :value => "0"}
+      %br
+      %br
+      %li
+        %label{:for => "equipment"} Equipment vorhanden:
+        %input{:type => "checkbox", :name => "equipment"}
+      %br
+      %li
+        %label{:for => "beratung"} Technik Beratung gewünscht:
+        %input{:type => "checkbox", :name => "beratung"}
+      %br
+      %li
+        %label{:for => "message"} Sonstiges:
+        %br
+        %textarea{:name => "message"}
+    
+    %input{:type=>"Reset"}
+    %input{:type => "submit", :value => "Send", :class => "button"}            

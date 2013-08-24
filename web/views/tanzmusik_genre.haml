@@ -1,0 +1,17 @@
+%h1 Musikwahl  
+%br
+%h2 Musik Genre
+%br
+%form{:action=>"/tanzmusik_genre",:method=>"post"}
+  - @genres.each do |genre|
+    %h3 #{genre}
+    %ol
+      %input{:type=>"radio",:name=>"#{genre}",:value=>"Super"} Super
+      %input{:type=>"radio",:name=>"#{genre}",:value=>"Gut"} Gut
+      %input{:type=>"radio",:name=>"#{genre}",:value=>"Gehtso"} Gehtso
+      %input{:type=>"radio",:name=>"#{genre}",:value=>"Nichtso"} Nichtso
+      %br
+      %br
+    %br
+  %input{:type=>"Reset"}
+  %input{:type=>"Submit",:value=>"Send"}

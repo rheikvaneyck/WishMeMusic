@@ -1,0 +1,29 @@
+!!!  
+%html  
+  %head  
+    %title Abschluss
+    %link(rel="stylesheet" href="css/reset-min.css")  
+    %link(rel="stylesheet" href="css/styles.css")
+  %body  
+    #wrapper  
+      #header  
+        %h1 DJ Pool Köln
+  
+        %p {version 0.3 by vicorz 2013}        
+      #nav  
+        %ol  
+          %a(href="/")  
+            %li Home
+          %a(href="philosophie")  
+            %li Philosophie
+          %a(href="hintergrund")  
+            %li Einen DJ suchen
+          %a(href="referenzen")  
+            %li Referenzen    
+      
+      #content 
+        =yield
+       
+      #footer  
+        %p  
+          designed by vicorz@2013

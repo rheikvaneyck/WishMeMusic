@@ -1,0 +1,12 @@
+class CreateEventRequest < ActiveRecord::Migration
+  def up
+    create_table :event_requests do |t|
+      <% scheme_description.each do |key, value| %><%="t.#{value} :#{key}" %>
+      <% end %>
+    end
+  end
+
+  def down
+    drop_table :event_requests
+  end
+end

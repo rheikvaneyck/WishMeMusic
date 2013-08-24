@@ -1,0 +1,18 @@
+%h1 Musikwahl  
+%br
+%h2 Hintergrundmusik
+
+%p{:style=>'text-align:justify'}
+%form{:action=>"/hintergrund",:method=>"post"} 
+  - @hintergr.each do |hinter|   
+    %ol
+      %input{:type=>"radio",:name=>"#{hinter}",:value=>"ok"} #{hinter} 
+  %br
+  %ol
+    %input{:type=>"radio",:name=>"sonstiges",:value=>"ok"} Sontiges           
+    %input{:type=>"text",:name=>"hintergrundwunsch"}
+    %br
+    %br
+  %br
+  %input{:type=>"Reset"}
+  %input{:type=>"Submit",:value=>"Send"}

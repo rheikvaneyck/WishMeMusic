@@ -1,0 +1,8 @@
+- finish database scheme 
+- connect web form with the database
+- redesign web form
+- finish email generator
+- write documentation
+- write a wiki
+- create better web design
+
