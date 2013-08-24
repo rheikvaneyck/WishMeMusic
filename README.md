@@ -82,7 +82,7 @@ Copyright (c) 2013 Viktor Rzesanke
 
 lola is copyrighted free software by Viktor Rzesanke.
 You can redistribute it and/or modify it under either the terms of the GPL
-(see COPYING.txt file).
+(see LICENSE file).
 
 The above copyright notice and this permission notice shall be
 included in all copies or substantial portions of the Software.

@@ -22,8 +22,9 @@ end
 
 namespace :db do
   desc "Create the initial migration file"
-  task :create_migration_file do
-      ruby "script/create_scheme/create_migration.rb"
+  task :create_migration_file, :filename do |t, args|
+      abort("Run 'rake db:create_migration_file['scheme description yml file']' with that file in the config/ directory") if args[:filename].nil?
+      ruby "script/create_scheme/create_migration.rb #{args[:filename]}"
   end 
 
   desc "Migrate the database through scripts in db/migrate. Target specific version with VERSION=x"

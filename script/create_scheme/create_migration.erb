@@ -1,4 +1,4 @@
-class CreateEventRequest < ActiveRecord::Migration
+class <%="Create#{class_name}"%> < ActiveRecord::Migration
   def up
     create_table :event_requests do |t|
       <% scheme_description.each do |key, value| %><%="t.#{value} :#{key}" %>
@@ -7,6 +7,6 @@ class CreateEventRequest < ActiveRecord::Migration
   end
 
   def down
-    drop_table :event_requests
+    drop_table <%= ":#{table_name}"%>
   end
 end

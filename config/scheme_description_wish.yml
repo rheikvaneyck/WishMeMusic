@@ -1,0 +1,2 @@
+event_id: integer		# Referenz zur  Kontakt Tabelle
+wishlist: text			# Antworten aus Abfrage

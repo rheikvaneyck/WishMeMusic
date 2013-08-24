@@ -34,6 +34,10 @@ module DiscJockey
 
     end
     class EventRequest < ActiveRecord::Base
+      has_one :wishes
+    end
+    class Wish < ActiveRecord::Base
+      belongs_to :event_requests
     end
   end
 end

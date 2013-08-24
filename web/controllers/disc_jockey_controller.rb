@@ -15,16 +15,29 @@ class DiscJockeyController < ApplicationController
   end
 
   post '/hintergrund' do
+    params.each do |key, value|
+      if (key == 'Sonstiges') then
+        session[:hintergrund] = params[:hintergrundwunsch]
+      elsif (value == 'ok') then
+        session[:hintergrund] = key
+      end
+    end
      redirect '/tanzmusik_zeit'
   end
 
   get '/tanzmusik_zeit' do
-    @times = ['20/30/40er Jahre', '50/60er Jahre', '70er Jahre', '70er Jahre', '80er Jahre', '90er Jahre', '2000 bis heute']
+    @times = ['20/30/40er Jahre', '50/60er Jahre', '70er Jahre', '80er Jahre', '90er Jahre', '2000 bis heute']
     haml :tanzmusik_zeit
   end
 
   post '/tanzmusik_zeit' do
-  	redirect '/tanzmusik_genre'
+    # HINWEIS: keine Werte, wenn radiobutton nicht geklickt 
+    str = []
+    params.each do |key, value|
+      str << "#{key}: #{value}"
+    end
+    session[:tanzmusik_zeit] = str.join("; ")
+    redirect '/tanzmusik_genre'
   end
 
   get '/tanzmusik_genre' do
@@ -33,6 +46,11 @@ class DiscJockeyController < ApplicationController
   end
 
   post '/tanzmusik_genre' do
+    str = []
+    params.each do |key, value|
+      str << "#{key}: #{value}"
+    end    
+    session[:tanzmusik_genre] = str.join("; ")
   	redirect '/kundendaten'
   end
 
@@ -68,6 +86,11 @@ class DiscJockeyController < ApplicationController
     end
     er.save
 
+    wish = DiscJockey::DBManager::Wish.new do |w|
+      w.event_id = er.id
+      w.wishlist = session[:hintergrund] + "\n" + session[:tanzmusik_zeit] + "\n" + session[:tanzmusik_genre]
+    end
+    wish.save
     redirect '/abschluss'
   end
     

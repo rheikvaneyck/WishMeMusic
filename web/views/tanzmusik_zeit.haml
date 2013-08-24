@@ -6,10 +6,8 @@
   - @times.each do |time|
     %h3 #{time}
     %ol
-      %input{:type=>"radio",:name=>"#{time}",:value=>"Super"} Super
-      %input{:type=>"radio",:name=>"#{time}",:value=>"Gut"} Gut
-      %input{:type=>"radio",:name=>"#{time}",:value=>"Gehtso"} Gehtso
-      %input{:type=>"radio",:name=>"#{time}",:value=>"Nichtso"} Nichtso
+      - %W(Super Gut Gehtso Nichtso).each do |a|
+        %input{:type=>"radio",:name=>"#{time}",:value=>"#{a}"} "#{a}" 
       %br
       %br
     %br
