@@ -1,0 +1,4 @@
+name: string # Benutzername
+password_hash: string # Password hash
+email: string # E-Mail-adresse
+admin: boolean # Adminrechte

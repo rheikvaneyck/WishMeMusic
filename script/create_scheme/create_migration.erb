@@ -1,6 +1,6 @@
 class <%="Create#{class_name}"%> < ActiveRecord::Migration
   def up
-    create_table :event_requests do |t|
+    create_table <%= ":#{table_name}"%> do |t|
       <% scheme_description.each do |key, value| %><%="t.#{value} :#{key}" %>
       <% end %>
     end
