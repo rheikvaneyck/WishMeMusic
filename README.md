@@ -1,11 +1,11 @@
 WishMe Music
 ======
 
-Web based Wish-A-DJ Form  
+Web based DJ contact Form  
 
 **Currently under development**
 
-lola is a small web based dashboard using Ruby's sinatra library as application middleware. 
+WishMeMusic is a small web based dashboard using Ruby's sinatra library as application middleware. 
 
 Dependencies
 ------------
@@ -19,21 +19,24 @@ Install the following libs beforehead (packet names for Fedora 18):
 * openssl-devel
 * zlib-devel
 
+Installation
+------------
 
-###Install all the gems we need
+0. install development libraries above for native gems
+1. install bundler gem
+2. clone git repository
+3. bundle install the gems for the app
+4. execute the db migration
+5. start the app 
 
-1. install the bundler gem >> `gem install bundler`
+
+###1. Install the bundler gem
+
+Install the bundler gem with `gem install bundler`
 
 The Ruby gems used are listed in the Gemfile. You can use the bundler gem to install them automaticly. If you have the **bundler** installed the next step after downloading the source is a call of `bundle install` in the source directory.
 
-2. install the gems by `bundle install`
-
-The gems the app needs depend on the application environment. During Development and testing the productiv gems aren't needed. So install only the development gems with `bundle --without production`. Thus, the app depends on sqlite3 and will use this local database file. 
-
-FIXME: From here the rest is up to development:
-
-Download the application
-------------------------
+###2. Download the application
 
 Let's Make a local copy of the source tree of the application with git:
 
@@ -41,18 +44,14 @@ Let's Make a local copy of the source tree of the application with git:
 git clone git://github.com/rheikvaneyck/lola.git
 ```
 
-Prepare the application
------------------------
+###3. bundle install the gems for the app
 
-###Create the migration file
+Install the gems by `bundle install`
 
-Before we can use a database we have to describe the database scheme. This is the base to run a migration in the next step. Usally this is part of the development process. But to make it easyer there is a script for it. Just edit the scheme_description*.yml files or create one and run 
+The gems the app needs depend on the application environment. During Development and testing the productiv gems aren't needed. So install only the development gems with `bundle --without production`. Thus, the app depends on sqlite3 and will use this local database file. 
 
-```
-rake db:create_migration_file
-``` 
 
-###Create the database
+###4. Create the database
 
 Now we have to import the data in the database. But first we need one. You create that database and the necessary tables with ruby's **rake** tool:
 
@@ -62,16 +61,26 @@ rake db:migrate
 
 All available rake tasks can be shown with the `rake -T` command.
 
-###Import the data manually
 
-Then you can import the data into the database with a rake task:
-```
-rake db:load_data
-```
-
-###Run the application
+###5. Run the application
 
 The application can be started with `rake web:run`. The web application listens on http://localhost:4567/
+
+
+Usefull for Development
+-------------------
+
+###Create a migration file
+
+A little script helps to create migration files. It takes a file with the describtion of the table columns and generates the unique migration files from that. Just create a description file, e.g. scheme_description_goal.yml, in the config/ directory with the name for the column as the last part of the filename and the type of date like that:
+
+```
+zeit: time
+goals: integer
+```
+
+A call of `rake db:create_migration_file['scheme_description_goal.yml']` generates a migration file from which the `rake db:migrate` creates, edits or deletes tables in the database.
+
 
 License
 -------
