@@ -41,7 +41,7 @@ The Ruby gems used are listed in the Gemfile. You can use the bundler gem to ins
 Let's Make a local copy of the source tree of the application with git:
 
 ```
-git clone git://github.com/rheikvaneyck/lola.git
+git clone git://github.com/rheikvaneyck/WishMeMusic.git
 ```
 
 ###3. bundle install the gems for the app
