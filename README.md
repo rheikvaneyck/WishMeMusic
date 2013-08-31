@@ -81,6 +81,11 @@ goals: integer
 
 A call of `rake db:create_migration_file['scheme_description_goal.yml']` generates a migration file from which the `rake db:migrate` creates, edits or deletes tables in the database.
 
+Screenshot
+----------
+
+![Screenshot](screen.png)
+
 
 License
 -------
