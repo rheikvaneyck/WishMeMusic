@@ -59,7 +59,7 @@ namespace :web do
   desc "Run the sinatra app"
   task :run do
     # ruby "-Ilib web/run_weather_dash.rb"
-    system("bundle exec rackup -Ilib -s mongrel -p 4567 -E development -P log/rack.pid web/config.ru")
+    system("bundle exec rackup -Ilib -s thin -p 4567 -E development -P log/rack.pid web/config.ru")
   end
 end
 

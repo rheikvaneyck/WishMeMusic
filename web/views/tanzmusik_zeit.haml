@@ -1,15 +1,20 @@
 %h1 Musikwahl
-%br
+
 %h2 Musik Zeit
-%br
-%form{:action=>"/tanzmusik_zeit",:method=>"post"}
-  - @times.each do |time|
-    %h3 #{time}
-    %ol
-      - %W(Super Gut Gehtso Nichtso).each do |a|
-        %input{:type=>"radio",:name=>"#{time}",:value=>"#{a}"} "#{a}" 
-      %br
-      %br
-    %br
-  %input{:type=>"Reset"}
-  %input{:type=>"Submit",:value=>"Send"}
+
+#wish_form
+  %form{:action=>"/tanzmusik_zeit",:method=>"post"}
+    %ul
+      - @times.each do |time|
+        %li
+          %div{:class=>"musik_zeit_opts_box"}
+            %div{:class=>"musik_zeit_label"}
+              #{time}:
+            %div{:class=>"musik_zeit_opts"}
+            - %W(Super Gut Gehtso Nichtso).each do |a|
+              %input{:type=>"radio",:name=>"#{time}",:value=>"#{a}"} 
+              %label #{a} 
+
+    #confirm
+      %input{:type=>"Reset", :class=>"clean_input"}
+      %input{:type=>"Submit", :class=>"clean_input",:value=>"Send"}

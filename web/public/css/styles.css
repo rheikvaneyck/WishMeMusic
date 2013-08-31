@@ -1,15 +1,21 @@
 #wrapper{  
-    width:66%;  
+    width: 800px;  
     margin:auto;  
 }  
   
 #header{  
-    background-color:#ade;  
+    padding: 10px;
+    border-bottom: 1px solid #ddd;  
 }  
   
 #header>h1{  
     font-size:200%;
-}  
+}
+#header p {
+    padding-left: 40px;
+    color: #aab;
+    font-size: small;
+}
 
 #content>h1{  
     font-size:150%;  
@@ -25,18 +31,24 @@ h3{
     font-size:110%;  
     font-family:sans-serif;  
 }  
-  
+#main {
+    width: 800px;
+    height: 424px;
+}  
 #content{  
-    margin:12px 0;  
+    margin:12px 0px;
+    width: 580px;
+    min-height: 400px;
     float:left;  
+    padding-left: 19px;
 }  
   
-#side_bar{  
-    margin:12px 0;  
-    width :30%;  
-    float:right;  
-    clear:none;  
-    background-color:#ddd;  
+#sidebar{  
+    margin:12px 0px;  
+    width: 200px;
+    min-height: 400px;  
+    float:left;  
+    border-right: 1px solid #ccc;  
 }  
   
 h1{  
@@ -44,43 +56,70 @@ h1{
 }  
   
 #footer{  
-    clear:both;  
-    background-color:#ade;  
-    font-size:75%;  
+    clear:both;
+    padding-top: 10px;  
+    font-size: small;  
     font-family:sans-serif;  
-    color:#333;  
-    border-top:solid 1px #69a;  
+    color: #aab;  
+    border-top:solid 1px #ddd;  
+    text-align: center;
 }  
   
-ol{  
-    padding-top:20px;  
-    background-color:#ade;  
-    display:block;  
+#sidebar ul{  
+    padding-top:10px;    
 }  
 
-li{  
-    color:whitesmoke;  
-    text-align:center;  
-    display:inline;  
-    padding:5px 10px 0 10px;  
-    margin-right:2px;  
-    background-color: #69a;  
+#sidebar li{  
+    padding-top: 10px;
+    color:#aab;  
+    text-align:center;
+    font-size: small;  
+}
+#content ul {
+    margin-top: 20px;
+}
+#content li {
+    line-height: 2em;
 }
 
-#content>ol{  
-    padding-top:20px;  
-    background-color:#ade;  
-    display:block;  
-}  
-  
-#content>li{  
-    color:black;  
-    text-align:center;  
-    display:inline;  
-    padding:5px 10px 0 10px;  
-    margin-right:2px;  
-    background-color: #69a;  
-}  
+#confirm {
+    padding-top: 40px;
+    padding-left: 350px;
+}
+
+#wish_form {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 5px 5px 3px #dfdfdf;
+    border-radius: 5px;
+    font-size: 90%;
+}
+.musik_zeit_label {
+    width: 16em;
+    float: left;
+}
+.musik_zeit_opts {
+    float: left;
+}
+.contact_box {
+    clear: both;
+}
+.contact_label {
+    width: 20em;
+    float: left;
+}
+.contact_input {
+    float: left;
+}
+.clean_input {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 3px;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 75%;  
+}
   
 a{  
     text-decoration:none;  

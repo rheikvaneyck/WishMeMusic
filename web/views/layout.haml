@@ -1,29 +1,46 @@
 !!!  
 %html  
   %head  
-    %title Abschluss
+    %title WishMeMusic
     %link(rel="stylesheet" href="css/reset-min.css")  
     %link(rel="stylesheet" href="css/styles.css")
   %body  
     #wrapper  
       #header  
         %h1 DJ Pool Köln
-  
-        %p {version 0.3 by vicorz 2013}        
-      #nav  
-        %ol  
-          %a(href="/")  
-            %li Home
-          %a(href="philosophie")  
-            %li Philosophie
-          %a(href="hintergrund")  
-            %li Einen DJ suchen
-          %a(href="referenzen")  
-            %li Referenzen    
-      
-      #content 
-        =yield
+        %p
+          hier spielt die music              
+      #main
+        #sidebar  
+          %ul  
+            %li 
+              %a(href="/")
+                %img(src="images/home.png")
+                %br
+                Home
+            %li 
+              %a(href="philosophie")
+                %img(src="images/philosophie.png")  
+                %br
+                Philosophie
+            %li
+              %a(href="hintergrund")
+                %img(src="images/wishmemusic.png")
+                %br  
+                Einen DJ suchen
+            %li 
+              %a(href="referenzen")
+                %img(src="images/referenzen.png")
+                %br
+                Referenzen    
+            %li 
+              %a(href="admin")
+                %img(src="images/login.png")  
+                %br
+                Login    
+        #content 
+          =yield
        
       #footer  
         %p  
-          designed by vicorz@2013
+          Copyright by vicorz (C) 2013
