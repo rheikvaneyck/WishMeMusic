@@ -1,9 +1,29 @@
 - done: create database scheme 
 - done: connect web form with the database
 - done redesign web form
-- optimize database scheme 
+- optimize database scheme
+	+ create user with admin flag (depends on authentication concept)
+	+ create contact management
+	+ create order management
 - create email generator
+	+ email concept
+	+ link email and order management
 - write documentation
+	+ document source
+	+ write explanatorily infos
+- add tests
+	+ create spec files
+	+ create usecases
 - write a wiki
+	+ base configuration
+	+ how to clone source and use git
+	+ describe architecture
+	+ how to contribute 
 - create better web design
+	+ functional layout
+	+ nice layout
+	+ nice icons
+	+ nice gimmicks and infos
+
+look at https://github.com/rheikvaneyck/WishMeMusic/issues/milestones for milestones and issues
 
