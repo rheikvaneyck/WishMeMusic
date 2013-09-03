@@ -1,7 +1,7 @@
 - done: create database scheme 
 - done: connect web form with the database
+- done redesign web form
 - optimize database scheme 
-- redesign web form
 - create email generator
 - write documentation
 - write a wiki
