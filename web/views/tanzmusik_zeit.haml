@@ -4,16 +4,21 @@
 
 #wish_form
   %form{:action=>"/tanzmusik_zeit",:method=>"post"}
-    %ul
-      - @times.each do |time|
-        %li
-          %div{:class=>"musik_zeit_opts_box"}
-            %div{:class=>"musik_zeit_label"}
+    %table{:class => "survey_table"}
+      %thead
+        %tr
+          %th
+          - %W(Super Gut Gehtso Nichtso).each do |a|
+            %th
+              #{a}
+      %tbody
+        - @times.each do |time|
+          %tr
+            %td
               #{time}:
-            %div{:class=>"musik_zeit_opts"}
             - %W(Super Gut Gehtso Nichtso).each do |a|
-              %input{:type=>"radio",:name=>"#{time}",:value=>"#{a}"} 
-              %label #{a} 
+              %td
+                %input{:type=>"radio",:name=>"#{time}",:value=>"#{a}"}  
 
     #confirm
       %input{:type=>"Reset", :class=>"clean_input"}

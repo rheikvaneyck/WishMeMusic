@@ -102,6 +102,29 @@ h1{
 .musik_zeit_opts {
     float: left;
 }
+.survey_table td:first-child {
+    width: 10em;
+    font-weight: bold;
+    text-align: left;
+}
+.survey_table th{
+    font-weight: bold;
+    text-align: center;
+    width: 7em;
+    line-height: 1.5em;
+    background-color: #ddd;
+}
+/* .survey_table tr:nth-child(odd) {
+    background-color:#eee;
+}*/
+.survey_table tr:nth-child(even) {
+    background-color:#eee;
+}
+.survey_table td {
+    text-align: center;
+    line-height: 2em;
+    vertical-align: middle;
+}
 .contact_box {
     clear: both;
 }
@@ -123,4 +146,13 @@ h1{
   
 a{  
     text-decoration:none;  
-}  
+} 
+.login {
+    margin-bottom: 10px;
+}
+.login_label {
+    float: left;
+    width: 10em;
+    font-weight: bold;
+    font-family: sans-serif;
+}

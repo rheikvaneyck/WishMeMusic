@@ -46,9 +46,11 @@ namespace :db do
       }
     elsif (ENV['PRODUCTION']) then
       db_config = YAML::load(File.open(File.join('config','database.yml')))['production']
+      Dir.mkdir('log') unless Dir.exists?('log')
       ActiveRecord::Base.logger = Logger.new(File.open(File.join('log','database.log'), 'a'))
     else
       db_config = YAML::load(File.open(File.join('config','database.yml')))['development']
+      Dir.mkdir('log') unless Dir.exists?('log')
       ActiveRecord::Base.logger = Logger.new(File.open(File.join('log','database.log'), 'a'))
     end
     ActiveRecord::Base.establish_connection(db_config)
