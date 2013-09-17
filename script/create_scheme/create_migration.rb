@@ -16,6 +16,7 @@ table_name = class_name.tableize
 File.open(File.join(File.dirname(__FILE__),'create_migration.erb'),'r') do |f|
   erb = ERB.new( f.read )
   timestamp = Time.now.strftime('%Y%m%d%H%M%S') # HELPER
+  Dir.mkdir(File.join(APP_ROOT,'db','migrate')) unless Dir.exists?(File.join(APP_ROOT,'db','migrate'))
   File.open(File.join(APP_ROOT,'db','migrate',timestamp + "_create_#{table_name}.rb"), 'w') do |e|
     e.write erb.result(binding)
   end

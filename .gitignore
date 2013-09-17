@@ -3,6 +3,7 @@ db/*.sqlite
 config/database.yml
 log/*.log
 log/*.pid
+data/*
 tmp/
 rneux.sublime-project
 rneux.sublime-workspace

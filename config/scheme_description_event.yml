@@ -1,13 +1,15 @@
-Name: string   			# Name
-Email: string     		# E-Mail-Adresse
-Tel: string   			# Telefonnummer
-EventDate: date    		# Veranstaltungsdatum
-Start: time   			# Beginn der Veranstaltung
-Strasse: string     	# Veranstaltungsort - Strasse
-Ort: string   			# Veranstaltungsort - Stadt
-AnzahlG: integer    	# Anzahl Gäste
-AnzahlG20: integer  	# Anzahl Gäste unter 20 
-AnzahlG60: integer  	# Anzahl Gäste über 60 
-EquipExist: boolean 	# Equipment vorhanden
-TechConsult: boolean	# Technik Beratung erwünscht
-Kommentar: text   		# Sonstige Anmerkungen
+name: string   			# Name
+email: string     	# E-Mail-Adresse
+tel: string   			# Telefonnummer
+datum: date    			# Veranstaltungsdatum
+zeit: time   				# Beginn der Veranstaltung
+strasse: string     # Veranstaltungsort - Strasse
+stadt: string   		# Veranstaltungsort - Stadt
+anzahl: integer    	# Anzahl Gäste
+anzahl20: integer  	# Anzahl Gäste unter 20 
+anzahl60: integer  	# Anzahl Gäste über 60 
+equipment: boolean 	# Equipment vorhanden
+beratung: boolean		# Technik Beratung erwünscht
+kommentar: text   	# Sonstige Anmerkungen
+wish_id: integer 		# Wunsch Referenz
+user_id: integer		# User Referenz

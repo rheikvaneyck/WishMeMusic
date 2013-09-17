@@ -1,4 +1,6 @@
-name: string # Benutzername
+firstname: string 		# Vorname
+name: string 					# Nachname
+aka_dj_name: string 	# DJ Name
 password_hash: string # Password hash
-email: string # E-Mail-adresse
-admin: boolean # Adminrechte
+email: string 				# E-Mail-adresse
+role: string 					# user | dj | admin (Adminrechte)

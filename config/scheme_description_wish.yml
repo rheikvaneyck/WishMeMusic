@@ -1,2 +1,4 @@
-event_id: integer		# Referenz zur  Kontakt Tabelle
-wishlist: text			# Antworten aus Abfrage
+background_musik: string	# Antworten aus Abfrage zum Musikwunsch: Hintergrund,
+tanzmusik_genre: string		# Genre,
+tanzmusik_zeit: string		# Zeitangabe
+user_id: integer 					# Nutzer Referenz

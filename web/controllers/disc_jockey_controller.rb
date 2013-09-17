@@ -36,7 +36,7 @@ class DiscJockeyController < ApplicationController
     params.each do |key, value|
       str << "#{key}: #{value}"
     end
-    session[:tanzmusik_zeit] = str.join("; ")
+    session[:tanzmusik_zeit] = str.join(";")
     redirect '/tanzmusik_genre'
   end
 
@@ -50,7 +50,7 @@ class DiscJockeyController < ApplicationController
     params.each do |key, value|
       str << "#{key}: #{value}"
     end    
-    session[:tanzmusik_genre] = str.join("; ")
+    session[:tanzmusik_genre] = str.join(";")
   	redirect '/kundendaten'
   end
 
@@ -69,7 +69,7 @@ class DiscJockeyController < ApplicationController
   post '/kundendaten' do
     @db = DiscJockey::DBManager.new
 
-    er = DiscJockey::DBManager::EventRequest.new do |r|
+    er = DiscJockey::DBManager::Event.new do |r|
       r.Name = params[:name]
       r.Email = params[:email]
       r.Tel = params[:tel]

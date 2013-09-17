@@ -18,6 +18,19 @@ namespace :orga do
       File.delete(f)
     end
   end
+  desc "Reset Source"
+  task :reset do
+    files = %w(config/database.yml db/db.sqlite3 log/database.log bundle/config)
+    files.each do |f|
+      puts "delete #{f}"
+      File.delete(f) if File.exists?(f)
+    end
+    Dir.glob('.bundle/*').each do|f|
+      puts "delete #{f}"
+      File.delete(f) if File.exists?(f)
+    end
+    Dir.rmdir('.bundle') if Dir.exists?('.bundle')
+  end
 end
 
 namespace :db do
@@ -30,6 +43,37 @@ namespace :db do
   desc "Migrate the database through scripts in db/migrate. Target specific version with VERSION=x"
   task :migrate => :environment do
     ActiveRecord::Migrator.migrate('db/migrate', ENV["VERSION"] ? ENV["VERSION"].to_i : nil )
+  end
+
+  desc "Load DJs into the database"
+  task :load_djs => :environment do
+    scheme_description_user = YAML.load_file(File.join('config','scheme_description_user.yml'))
+    scheme_description_wish = YAML.load_file(File.join('config','scheme_description_wish.yml'))
+
+    class Wish < ActiveRecord::Base
+      belongs_to :users
+    end
+    class User < ActiveRecord::Base
+      has_many :wishes
+    end
+
+    Dir.glob('data/user_*.yml').each do |f|
+      data = YAML.load_file(f)
+
+      scheme_description_user.each do |key, value|
+        scheme_description_user[key] = data[key]
+      end
+      scheme_description_user[:role] = "dj"
+
+      scheme_description_wish.each do |key, value|
+        scheme_description_wish[key] = data[key].map{|k,v| "#{k}: #{v}"}.join(";") unless data[key].nil?
+      end
+
+
+      @u = User.create scheme_description_user
+      @u.wishes.create scheme_description_wish
+
+    end
   end
 
   task :environment do

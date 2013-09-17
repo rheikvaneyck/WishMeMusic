@@ -33,11 +33,17 @@ module DiscJockey
       ActiveRecord::Base.establish_connection(db_config)
 
     end
-    class EventRequest < ActiveRecord::Base
-      has_one :wishes
+    class Event < ActiveRecord::Base
+      belongs_to :wishes
+      belongs_to :users
     end
     class Wish < ActiveRecord::Base
-      belongs_to :event_requests
+      has_one :event
+      belongs_to :users
+    end
+    class User < ActiveRecord::Base
+      has_many :wishes
+      has_many :events
     end
   end
 end
