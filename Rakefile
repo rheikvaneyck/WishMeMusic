@@ -30,6 +30,10 @@ namespace :orga do
       File.delete(f) if File.exists?(f)
     end
     Dir.rmdir('.bundle') if Dir.exists?('.bundle')
+    Dir.glob('db/migrate/*').each do|f|
+      puts "delete #{f}"
+      File.delete(f) if File.exists?(f)
+    end
   end
 end
 

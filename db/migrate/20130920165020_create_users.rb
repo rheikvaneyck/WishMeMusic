@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :aka_dj_name
       t.string :password_hash
       t.string :email
+      t.string :tel
       t.string :role
       
     end

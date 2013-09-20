@@ -1,6 +1,3 @@
-name: string   			# Name
-email: string     	# E-Mail-Adresse
-tel: string   			# Telefonnummer
 datum: date    			# Veranstaltungsdatum
 zeit: time   				# Beginn der Veranstaltung
 strasse: string     # Veranstaltungsort - Strasse

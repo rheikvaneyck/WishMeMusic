@@ -1,6 +1,7 @@
 bundle/*
 db/*.sqlite
 config/database.yml
+config/email.yml
 log/*.log
 log/*.pid
 data/*

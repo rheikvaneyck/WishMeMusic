@@ -1,6 +1,7 @@
 require 'bundler/setup'
 require 'haml'
-# require 'pony'
+require 'pony'
+require 'time'
 require 'disc_jockey'
 
 class DiscJockeyController < ApplicationController
@@ -69,32 +70,91 @@ class DiscJockeyController < ApplicationController
   post '/kundendaten' do
     @db = DiscJockey::DBManager.new
 
-    er = DiscJockey::DBManager::Event.new do |r|
-      r.Name = params[:name]
-      r.Email = params[:email]
-      r.Tel = params[:tel]
-      r.EventDate = params[:datum]
-      r.Start = params[:zeit]
-      r.Strasse = params[:strasse]
-      r.Ort = params[:stadt]
-      r.AnzahlG = params[:anzahl]
-      r.AnzahlG20 = params[:unter20]
-      r.AnzahlG60 = params[:ueber60]
-      r.EquipExist = params[:equipment]
-      r.TechConsult = params[:beratung]
-      r.Kommentar = params[:message]
-    end
-    er.save
+    lastname = (params[:name]).split(" ").last unless params[:name].nil?
+    surname = (params[:name]).split(" ")
+    surname.delete(lastname) unless lastname.nil?
+    surname = surname.join(" ")
 
-    wish = DiscJockey::DBManager::Wish.new do |w|
-      w.event_id = er.id
-      w.wishlist = session[:hintergrund] + "\n" + session[:tanzmusik_zeit] + "\n" + session[:tanzmusik_genre]
+    @u = DiscJockey::DBManager::User.find(:first, :conditions => [ "email = ?", params[:email]])
+    
+    @u = DiscJockey::DBManager::User.create(
+      :email  => params[:email],
+      :tel => params[:tel],
+      :name => lastname,
+      :firstname => surname,
+      :email => params[:email],
+      :role => 'user') if @u.nil?
+
+    @w = DiscJockey::DBManager::Wish.create(
+      :background_musik => session[:hintergrund], 
+      :tanzmusik_genre => session[:tanzmusik_genre], 
+      :tanzmusik_zeit => session[:tanzmusik_zeit], 
+      :user_id => @u.id)
+
+    @er = DiscJockey::DBManager::Event.new do |r|
+      r.datum = params[:datum]
+      r.zeit = params[:zeit]
+      r.strasse = params[:strasse]
+      r.stadt = params[:stadt]
+      r.anzahl = params[:anzahl]
+      r.anzahl20 = params[:unter20]
+      r.anzahl60 = params[:ueber60]
+      r.equipment = params[:equipment]
+      r.beratung = params[:beratung]
+      r.kommentar = params[:message]
+      r.user_id = @u.id
+      r.wish_id = @w.id
     end
-    wish.save
-    redirect '/abschluss'
+    @er.save
+
+    redirect "/abschluss?id=#{@er.id}"
   end
     
   get '/abschluss' do
+    @id = params[:id]
+
+    @db = DiscJockey::DBManager.new
+    @event = DiscJockey::DBManager::Event.find(@id)
+    @user = DiscJockey::DBManager::User.find(@event.user_id)
+    @wish = DiscJockey::DBManager::Wish.find(@event.wish_id)
+
+    @event_date = Time.parse(@event.datum.to_s).strftime("%d. %b %Y")
+    @event_time = Time.parse(@event.zeit.to_s).strftime("%H:%M")
+
+    body_text = <<-END
+
+    Event-ID: #{@event.id}
+    Kunde: #{@user.firstname} #{@user.name}
+
+    Event am: #{@event_date} um #{@event_time} Uhr
+    
+    Hintergrund-Musik: 
+      #{@wish.background_musik.split(";").join("\t\n")}
+
+    Tanzmusik Genre: 
+      #{@wish.tanzmusik_genre.split(";").join("\t\n")}
+    
+    Tanzmusik Zeit: 
+      #{@wish.tanzmusik_zeit.split(";").join("\t\n")}
+
+    Kontakt: #{@user.email}
+    END
+
+    mailer_config = YAML.load_file(File.join('config','email.yml'))
+
+    Pony.options = {
+      :via =>  mailer_config["via"],
+      :address => mailer_config["address"],
+      :port => mailer_config["port"],
+      :enable_starttls_auto => mailer_config["enable_starttls_auto"],
+      :user_name => mailer_config["user_name"],
+      :password => mailer_config["password"],
+      :authentication => mailer_config["authentication"],
+      :domain => mailer_config["domain"]
+    }
+
+    Pony.mail(:to => mailer_config["to"], :cc => mailer_config["cc"], :subject => "WishMeMusic Event Report", :body => "#{body_text}")
+
     haml :abschluss
   end
 

@@ -2,5 +2,6 @@ firstname: string 		# Vorname
 name: string 					# Nachname
 aka_dj_name: string 	# DJ Name
 password_hash: string # Password hash
-email: string 				# E-Mail-adresse
+email: string 				# E-Mail-Adresse
+tel:	string						# Tel-Nummer
 role: string 					# user | dj | admin (Adminrechte)
