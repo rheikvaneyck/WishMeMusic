@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'haml'
+require 'erb'
 require 'pony'
 require 'time'
 require 'disc_jockey'
@@ -11,11 +12,12 @@ class DiscJockeyController < ApplicationController
   end
 
   get '/hintergrund' do  
-    @hintergr = ['Cafe del Mar', 'Lounge', 'Chillout']
+    @hintergr = ['Bar Jazz','Cafe del Mar', 'Chanson', 'Klassik', 'Kuba', 'Lounge', 'Aktuelles']
     haml :hintergrund
   end
 
   post '/hintergrund' do
+
     params.each do |key, value|
       if (key == 'Sonstiges') then
         session[:hintergrund] = params[:hintergrundwunsch]
@@ -27,12 +29,13 @@ class DiscJockeyController < ApplicationController
   end
 
   get '/tanzmusik_zeit' do
+    @categories = ["Passt Super", "Geht so", "Lieber nicht"]
     @times = ['20/30/40er Jahre', '50/60er Jahre', '70er Jahre', '80er Jahre', '90er Jahre', '2000 bis heute']
     haml :tanzmusik_zeit
   end
 
   post '/tanzmusik_zeit' do
-    # HINWEIS: keine Werte, wenn radiobutton nicht geklickt 
+    # HINWEIS: keine Werte, wenn radiobutton nicht geklickt
     str = []
     params.each do |key, value|
       str << "#{key}: #{value}"
@@ -42,8 +45,9 @@ class DiscJockeyController < ApplicationController
   end
 
   get '/tanzmusik_genre' do
-     @genres = ['Aktuelle Charts', 'POP International', 'POP Deutsch', 'Rock Oldies', 'Rock Modern', 'Rock Deutsch', 'Alternative', 'Soul/Funk', 'Latino', 'House/Techno', 'Hip Hop International', 'Hip Hop Deutsch','World-Musik', 'Kölsches Tön', 'Schlager/NDW', 'Mallorca/Apres-Ski', 'Standard-Tänze']     
-     haml :tanzmusik_genre
+    @categories = ["Passt Super", "Geht so", "Lieber nicht"]
+    @genres = ['Aktuelle Charts', 'POP International', 'POP Deutsch', 'Rock Oldies', 'Rock Modern', 'Rock Deutsch', 'Alternative', 'Soul/Funk', 'Latino', 'House/Techno', 'Hip Hop International', 'Hip Hop Deutsch','World-Musik', 'Kölsches Tön', 'Schlager/NDW', 'Mallorca/Apres-Ski', 'Standard-Tänze']     
+    haml :tanzmusik_genre
   end
 
   post '/tanzmusik_genre' do
@@ -129,16 +133,35 @@ class DiscJockeyController < ApplicationController
     Event am: #{@event_date} um #{@event_time} Uhr
     
     Hintergrund-Musik: 
-      #{@wish.background_musik.split(";").join("\t\n")}
+      #{@wish.background_musik.split(";").join("\n\t")}
 
     Tanzmusik Genre: 
-      #{@wish.tanzmusik_genre.split(";").join("\t\n")}
+      #{@wish.tanzmusik_genre.split(";").join("\n\t")}
     
     Tanzmusik Zeit: 
-      #{@wish.tanzmusik_zeit.split(";").join("\t\n")}
+      #{@wish.tanzmusik_zeit.split(";").join("\n\t")}
 
     Kontakt: #{@user.email}
     END
+
+    class DJScore
+      attr_accessor :dj, :score
+      def initialize(dj, score)
+        @dj = dj
+        @score = score
+      end
+    end
+    @djs = DiscJockey::DBManager::User.find(:all, :conditions => [ "role = ?", "dj"])
+    @djs_match = []
+    @djs.each do |dj|
+      if dj.aka_dj_name.nil? then dj.aka_dj_name = dj.name end
+      # FIXME: random scoring!!! Make a lib for that task
+      @djs_match << DJScore.new(dj.aka_dj_name, rand(5))
+    end
+    @djs_match.sort! {|x,y| x.score <=> y.score}.reverse!
+    @max_score = @djs_match.max { |x,y| x.score <=> y.score}
+    erb = ERB.new(File.read("web/views/email.html.erb"))
+    body_html =  erb.result(binding)
 
     mailer_config = YAML.load_file(File.join('config','email.yml'))
 
@@ -153,7 +176,11 @@ class DiscJockeyController < ApplicationController
       :domain => mailer_config["domain"]
     }
 
-    Pony.mail(:to => mailer_config["to"], :cc => mailer_config["cc"], :subject => "WishMeMusic Event Report", :body => "#{body_text}")
+    Pony.mail(:to => mailer_config["to"], 
+      :cc => mailer_config["cc"], 
+      :subject => "WishMeMusic Event Report", 
+      :body_html => body_html,
+      :body => body_text)
 
     haml :abschluss
   end

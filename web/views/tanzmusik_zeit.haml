@@ -8,7 +8,7 @@
       %thead
         %tr
           %th
-          - %W(Super Gut Gehtso Nichtso).each do |a|
+          - @categories.each do |a|
             %th
               #{a}
       %tbody
@@ -16,9 +16,9 @@
           %tr
             %td
               #{time}:
-            - %W(Super Gut Gehtso Nichtso).each do |a|
+            - @categories.each do |a|
               %td
-                %input{:type=>"radio",:name=>"#{time}",:value=>"#{a}"}  
+                %input{:type=>"radio",:name=>"#{time}",:value=>"#{a}", :checked => a == "Lieber nicht"}  
 
     #confirm
       %input{:type=>"Reset", :class=>"clean_input"}

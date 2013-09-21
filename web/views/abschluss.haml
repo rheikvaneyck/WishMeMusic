@@ -1,10 +1,12 @@
 %h1 Ihre Musikwahl ist abgeschlossen!
 %br
 %h2 
-	Event am: "#{@event_date}" um "#{@event_time}" Uhr
+	Event am: #{@event_date} um #{@event_time} Uhr
+%br
 %p
-	Event ID: 			"#{@id}"
+	Event ID:       "#{@id}"
 	E-Mail-Kontakt: "#{@user.email}"
+%br
 %p
 	Vielen Dank für Ihre Anfrage. Sie werden in Kürze von dem zu Ihnen passenden DJ per EMail kontaktiert.
 %br
