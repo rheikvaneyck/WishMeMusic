@@ -125,6 +125,9 @@ class DiscJockeyController < ApplicationController
     @event_date = Time.parse(@event.datum.to_s).strftime("%d. %b %Y")
     @event_time = Time.parse(@event.zeit.to_s).strftime("%H:%M")
 
+=begin
+    # FIXME: Pony sendet ENTWEDER plain text ODER html
+
     body_text = <<-END
 
     Event-ID: #{@event.id}
@@ -143,7 +146,8 @@ class DiscJockeyController < ApplicationController
 
     Kontakt: #{@user.email}
     END
-
+=end
+    # FIXME: In lib auslagern
     class DJScore
       attr_accessor :dj, :score
       def initialize(dj, score)
@@ -151,6 +155,7 @@ class DiscJockeyController < ApplicationController
         @score = score
       end
     end
+
     @djs = DiscJockey::DBManager::User.find(:all, :conditions => [ "role = ?", "dj"])
     @djs_match = []
     @djs.each do |dj|
@@ -162,6 +167,7 @@ class DiscJockeyController < ApplicationController
     @max_score = @djs_match.max { |x,y| x.score <=> y.score}
     erb = ERB.new(File.read("web/views/email.html.erb"))
     body_html =  erb.result(binding)
+    # END: In lib auslagern
 
     mailer_config = YAML.load_file(File.join('config','email.yml'))
 
@@ -178,9 +184,10 @@ class DiscJockeyController < ApplicationController
 
     Pony.mail(:to => mailer_config["to"], 
       :cc => mailer_config["cc"], 
+      :from => mailer_config["from"],
       :subject => "WishMeMusic Event Report", 
-      :body_html => body_html,
-      :body => body_text)
+      :content_type => "text/html",
+      :body => body_html)
 
     haml :abschluss
   end

@@ -2,112 +2,75 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style type="text/css">
-        body {
-            font-family: sans-serif;
-            font-size: 10pt;
-        }
-        h1 {
-            font-size: 12pt;
-            color: steelblue;
-        }
-        table {
-            margin-left: 2em;
-            border: 1px solid lightgray;
-        }
-        td {
-            line-height: 1.3em;
-            padding-left: 2em;
-            padding-right: 2em;
-        }
-        .bold {
-            font-weight: bold;
-        }
-        .subheader {
-            background-color: darkgrey;
-            color: white;
-            font-weight: bold;
-        }
-        .list:nth-child(even) {
-            background-color: #ddd;
-        }
-        .colored {
-            color: darkgreen;
-            font-weight: bold;
-        }
-        .greyed {
-            color: silver;
-        }
-    </style>
 </head>
-<body>
-    <h1>WishMeMusic Event Auftrag</h1>
+<body style="font-family: sans-serif;font-size: 10pt;">
+    <h1 style="font-size: 12pt;color: steelblue;">WishMeMusic Event Auftrag</h1>
 
-    <table>
+    <table style="margin-left: 2em;border: 1px solid lightgray;">
     	<tr>
-    		<td class="bold">Event-ID: </td><td><%= "#{@event.id}" %></td>
+    		<td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;font-weight: bold;">Event-ID: </td><td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;"><%= "#{@event.id}" %></td>
     	</tr>
     	<tr>
-    		<td class="bold">Kunde:    </td><td><%= "#{@user.firstname} #{@user.name}" %></td>
+    		<td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;font-weight: bold;">Kunde:    </td><td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;"><%= "#{@user.firstname} #{@user.name}" %></td>
     	</tr>
     	<tr>
-    		<td class="bold">Kontakt:  </td><td><%= "#{@user.email}" %></td>
+    		<td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;font-weight: bold;">Kontakt:  </td><td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;"><%= "#{@user.email}" %></td>
     	</tr>
     	<tr>
-    		<td class="bold">Event am: </td><td><%= "#{@event_date} um #{@event_time} Uhr" %></td>
+    		<td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;font-weight: bold;">Event am: </td><td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;"><%= "#{@event_date} um #{@event_time} Uhr" %></td>
     	</tr>
     	<tr></tr>
     	<tr>
-        	<td colspan="2" class="subheader">Hintergrund-Musik:</td>
+        	<td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;background-color: darkgrey;color: white;font-weight: bold" colspan="2">Hintergrund-Musik:</td>
         </tr>
         <% @wish.background_musik.split(";").each do |bm| %>
         	<tr class="list">
         	<% bm.split(":").each do |m| %>
-        		<td><%="#{m.strip}" %></td>
+        		<td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;"><%="#{m.strip}" %></td>
         	<% end %>
         	</tr>
         <% end %>
     	<tr>
-        	<td colspan="2" class="subheader">Tanzmusik Genre:</td>
+        	<td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;background-color: darkgrey;color: white;font-weight: bold" colspan="2">Tanzmusik Genre:</td>
         </tr>
         <% @wish.tanzmusik_genre.split(";").each do |bm| %>
         	<tr class="list">
         	<% bm.split(":").each do |m| %>
                 <% if (m.strip == "Passt Super") then %>
-        		  <%= "<td class='colored'>#{m.strip}</td>" %>
+        		  <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;color: darkgreen;font-weight: bold;'>#{m.strip}</td>" %>
                 <% elsif (m.strip == "Lieber nicht") then %>
-                    <%= "<td class='greyed'>#{m.strip}</td>" %>
+                    <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;color: silver;'>#{m.strip}</td>" %>
                 <% else %>
-                  <%= "<td>#{m.strip}</td>" %>
+                  <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;'>#{m.strip}</td>" %>
                 <% end %>
         	<% end %>
         	</tr>
         <% end %>
     	<tr>
-        	<td colspan="2" class="subheader">Tanzmusik Zeit:</td>
+        	<td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;background-color: darkgrey;color: white;font-weight: bold" colspan="2">Tanzmusik Zeit:</td>
         </tr>
         <% @wish.tanzmusik_zeit.split(";").each do |bm| %>
         	<tr class="list">
         	<% bm.split(":").each do |m| %>
                 <% if (m.strip == "Passt Super") then %>
-                  <%= "<td class='colored'>#{m.strip}</td>" %>
+                  <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;color: darkgreen;font-weight: bold;'>#{m.strip}</td>" %>
                 <% elsif (m.strip == "Lieber nicht") then %>
-                    <%= "<td class='greyed'>#{m.strip}</td>" %>
+                    <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;color: silver;'>#{m.strip}</td>" %>
                 <% else %>
-                  <%= "<td>#{m.strip}</td>" %>
+                  <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;'>#{m.strip}</td>" %>
                 <% end %>
         	<% end %>
         	</tr>
         <% end %>  
         <tr>
-            <td colspan="2" class="subheader">DJs match:</td>
+            <td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;background-color: darkgrey;color: white;font-weight: bold" colspan="2">DJs match:</td>
         </tr>
         <% @djs_match.each do |d| %>
             <tr class="list">
                 <% if (d.score == @max_score.score) then %>
-                    <%= "<td class='colored'>#{d.dj}</td><td class='colored'>#{d.score}</td>" %>
+                    <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;color: darkgreen;font-weight: bold;'>#{d.dj}</td><td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;color: darkgreen;font-weight: bold;'>#{d.score}</td>" %>
                 <% else %> 
-                    <%= "<td>#{d.dj}</td><td>#{d.score}</td>" %>
+                    <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;'>#{d.dj}</td><td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;'>#{d.score}</td>" %>
                 <% end %>
             </tr>
         <% end %>
