@@ -7,13 +7,13 @@
     padding: 10px;
     border-bottom: 1px solid #ddd;  
 }  
-#header.icon {
+#icon {
     position: relative;
     top: 10px;
     right: 10px;
     float: right;
 } 
-#header.icon img {
+#icon img {
     width: 100px;
 } 
 #header>h1{  
