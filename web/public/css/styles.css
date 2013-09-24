@@ -7,14 +7,25 @@
     padding: 10px;
     border-bottom: 1px solid #ddd;  
 }  
-  
+#header.icon {
+    position: relative;
+    top: 10px;
+    right: 10px;
+    float: right;
+} 
+#header.icon img {
+    width: 100px;
+} 
 #header>h1{  
     font-size:200%;
+    margin-bottom: 0px;
 }
 #header p {
     padding-left: 40px;
     color: #aab;
     font-size: small;
+    margin-top: 0px;
+    margin-bottom: 0.2em;
 }
 
 #content>h1{  
@@ -24,7 +35,10 @@
 
 h2{  
     font-size:130%;  
-    font-family:sans-serif;  
+    font-family:sans-serif;
+    font-weight: normal;
+    margin-bottom: 0px;
+    text-align: right;  
 }
 
 h3{  
@@ -58,15 +72,20 @@ h1{
 #footer{  
     clear:both;
     padding-top: 10px;  
-    font-size: small;  
+    font-size: x-small;  
     font-family:sans-serif;  
     color: #aab;  
     border-top:solid 1px #ddd;  
     text-align: center;
 }  
+
+#footer p {
+    margin: 0px;
+}
   
 #sidebar ul{  
-    padding-top:10px;    
+    padding-top:10px; 
+    list-style: none;   
 }  
 
 #sidebar li{  
@@ -77,9 +96,16 @@ h1{
 }
 #content ul {
     margin-top: 20px;
+    list-style: none;
+    padding: 0px;
 }
 #content li {
     line-height: 2em;
+}
+.content_field textarea {
+    width: 510px;
+    height: 100px;
+    resize: none;
 }
 
 #confirm {
@@ -88,12 +114,12 @@ h1{
 }
 
 #wish_form {
-    margin-top: 20px;
+    margin-top: 0px;
     padding: 20px;
     border: 1px solid #ddd;
     box-shadow: 5px 5px 3px #dfdfdf;
     border-radius: 5px;
-    font-size: 90%;
+    font-size: 85%;
     font-family: sans-serif;
 }
 .musik_zeit_label {
@@ -105,11 +131,9 @@ h1{
 }
 .survey_table td:first-child {
     width: 10em;
-    font-weight: bold;
     text-align: left;
 }
 .survey_table th{
-    font-weight: bold;
     text-align: center;
     width: 7em;
     line-height: 1.5em;

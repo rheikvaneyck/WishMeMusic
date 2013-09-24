@@ -123,7 +123,7 @@ class DiscJockeyController < ApplicationController
     @wish = DiscJockey::DBManager::Wish.find(@event.wish_id)
 
     @event_date = Time.parse(@event.datum.to_s).strftime("%d. %b %Y") unless @event.datum.nil?
-    @event_time = Time.parse(@event.zeit.to_s).strftime("%H:%M") unless event.zeit.nil?
+    @event_time = Time.parse(@event.zeit.to_s).strftime("%H:%M") unless @event.zeit.nil?
 
 =begin
     # FIXME: Pony sendet ENTWEDER plain text ODER html
