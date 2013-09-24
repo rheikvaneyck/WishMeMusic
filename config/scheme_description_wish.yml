@@ -1,4 +1,4 @@
-background_musik: string	# Antworten aus Abfrage zum Musikwunsch: Hintergrund,
-tanzmusik_genre: string		# Genre,
-tanzmusik_zeit: string		# Zeitangabe
+background_musik: text	# Antworten aus Abfrage zum Musikwunsch: Hintergrund,
+tanzmusik_genre: text		# Genre,
+tanzmusik_zeit: text		# Zeitangabe
 user_id: integer 					# Nutzer Referenz
