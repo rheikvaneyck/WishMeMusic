@@ -94,6 +94,7 @@ h1{
     box-shadow: 5px 5px 3px #dfdfdf;
     border-radius: 5px;
     font-size: 90%;
+    font-family: sans-serif;
 }
 .musik_zeit_label {
     width: 16em;
@@ -129,7 +130,7 @@ h1{
     clear: both;
 }
 .contact_label {
-    width: 20em;
+    width: 18em;
     float: left;
 }
 .contact_input {

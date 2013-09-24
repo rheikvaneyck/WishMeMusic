@@ -122,8 +122,8 @@ class DiscJockeyController < ApplicationController
     @user = DiscJockey::DBManager::User.find(@event.user_id)
     @wish = DiscJockey::DBManager::Wish.find(@event.wish_id)
 
-    @event_date = Time.parse(@event.datum.to_s).strftime("%d. %b %Y")
-    @event_time = Time.parse(@event.zeit.to_s).strftime("%H:%M")
+    @event_date = Time.parse(@event.datum.to_s).strftime("%d. %b %Y") unless @event.datum.nil?
+    @event_time = Time.parse(@event.zeit.to_s).strftime("%H:%M") unless event.zeit.nil?
 
 =begin
     # FIXME: Pony sendet ENTWEDER plain text ODER html
@@ -187,14 +187,11 @@ class DiscJockeyController < ApplicationController
 
 
       wish_genre = @wish.tanzmusik_genre.split(";").map {|i| i.split(":")}
-      #puts wish_genre[0].inspect
+      
       wish_genre.each do |w|
-        puts w.inspect
         idx = favour.tanzmusik_genre.index(w[0])
-        puts idx
         unless idx.nil?
           favour.tanzmusik_genre[idx..-1][/^([öä\w\s\/-]+:)\s*([\w\s]+)/]
-          puts favour.tanzmusik_genre[idx..-1]
           score = score + 2 - (how_much.index($2) - like_it.index(w[1].strip)).abs
         end
       end
