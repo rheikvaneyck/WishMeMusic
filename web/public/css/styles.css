@@ -14,7 +14,7 @@
     float: right;
 } 
 #icon img {
-    width: 100px;
+    width: 95px;
 } 
 #header>h1{  
     font-size:200%;
@@ -149,6 +149,15 @@ h1{
     text-align: center;
     line-height: 2em;
     vertical-align: middle;
+}
+.contact_field {
+    border: none;
+    padding: 0px;
+}
+.contact_field textarea {
+    width: 510px;
+    height: 100px;
+    resize: none;
 }
 .contact_box {
     clear: both;
