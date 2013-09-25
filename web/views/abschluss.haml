@@ -1,15 +1,17 @@
 %h1 Ihre Musikwahl ist abgeschlossen!
-%br
-%h2 
-	Event am: #{@event_date} um #{@event_time} Uhr
-%br
-%p
-	Event ID:       "#{@id}"
-	E-Mail-Kontakt: "#{@user.email}"
-%br
-%p
-	Vielen Dank für Ihre Anfrage. Sie werden in Kürze von dem zu Ihnen passenden DJ per EMail kontaktiert.
-%br
-%br
-%p  Viele Grüße vom
-%p  DJ-Pool-Team Köln
+%div(class='abschluss_text')
+	Wir haben Ihr Event, dass am: 
+	%span(class='abschluss_confirm') #{@event_date} 
+	um 
+	%span(class='abschluss_confirm') #{@event_time} Uhr
+	stattfinden soll, registriert. 
+%div(class='abschluss_text')
+	Vielen Dank für Ihre Anfrage. Sie werden in Kürze von dem zu Ihnen passenden DJ per E-Mail an 
+	%span(class='abschluss_email')
+		#{@user.email}
+	kontaktiert.
+%div(class='abschluss_greeting')
+	%p  Viele Grüße vom
+	%p  DJ-Pool-Team Köln
+%div(class='abschluss_djhey')
+	%img(src='images/DJ-hey.jpg')

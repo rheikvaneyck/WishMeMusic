@@ -129,6 +129,9 @@ h1{
 .musik_zeit_opts {
     float: left;
 }
+.survey_table{
+    width: 100%;
+}
 .survey_table td:first-child {
     width: 10em;
     text-align: left;
@@ -189,4 +192,27 @@ a{
     width: 10em;
     font-weight: bold;
     font-family: sans-serif;
+}
+.abschluss_text {
+    margin-top: 4em;
+}
+.abschluss_confirm {
+    font-weight: normal;
+    font-size: 150%;
+}
+.abschluss_email {
+    color: darkblue;
+    font-weight: bold;
+}
+.abschluss_greeting {
+    margin-top: 4em;
+}
+.abschluss_djhey {
+    position: relative;
+    bottom: 100px;
+    right: 0px;
+    float: right;
+}
+.abschluss_djhey img {
+    width: 400px;
 }
