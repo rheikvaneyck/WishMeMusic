@@ -13,6 +13,17 @@ class DiscJockeyController < ApplicationController
 
   get '/hintergrund' do  
     @hintergr = ['Bar Jazz','Cafe del Mar', 'Chanson', 'Klassik', 'Kuba', 'Lounge', 'Aktuelles']
+    puts @hintergr[0]
+    @descriptions = {
+      @hintergr[0] => "Bar Jazz ist...",
+      @hintergr[1] => "Cafe del Mar ist...",
+      @hintergr[2] => "Chanson ist...",
+      @hintergr[3] => "Klassik ist...",
+      @hintergr[4] => "Kuba ist...",
+      @hintergr[5] => "Lounge ist...",
+      @hintergr[6] => "Aktuelles ist..."
+    }
+
     haml :hintergrund
   end
 

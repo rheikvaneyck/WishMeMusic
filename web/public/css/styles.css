@@ -122,6 +122,36 @@ h1{
     font-size: 85%;
     font-family: sans-serif;
 }
+#bg_group {
+    clear: both;
+    margin-left: 50px;
+}
+#bg_radio {
+    width: 20;
+    height: 2em;
+    float: left;
+    vertical-align: middle;
+    padding-top: 5px;
+}
+#bg_label {
+    width: 8em;
+    height: 2em;
+    float: left;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+#bg_image {
+    width: 20px;
+    height: 2em;
+    float: left;
+    vertical-align: middle;
+    padding-top: 5px;
+}
+.help_icon {
+    width: 16px;
+    vertical-align: middle;
+    position: relative;
+}
 .musik_zeit_label {
     width: 16em;
     float: left;
@@ -153,12 +183,55 @@ h1{
     line-height: 2em;
     vertical-align: middle;
 }
+#personal_frame {
+    border: 1px solid lightgrey;
+    padding: 5px;
+    height: 8em;
+}
+#personal_frame_description {
+    position: relative;
+    font-size: small;
+    background-color: #fff;
+    top: -1em;
+    left: 1.5em;
+    width: 10em;
+    height: 1.5em;
+    text-align: center;
+    border: 1px solid lightgrey;
+    color: darkgray;
+}
+#personal_frame ul {
+    margin-left: 2em;
+    margin-top: 0px;
+}
+#event_frame {
+    border: 1px solid lightgrey;
+    padding: 5px;
+    height: 30em;
+    margin-top: 2em;  
+}
+#event_frame_description {
+    position: relative;
+    font-size: small;
+    background-color: #fff;
+    top: -1em;
+    left: 1.5em;
+    width: 15em;
+    height: 1.5em;
+    text-align: center;
+    border: 1px solid lightgrey;
+    color: darkgray;
+}
+#event_frame ul {
+    margin-left: 2em;
+    margin-top: 0px;
+}
 .contact_field {
     border: none;
     padding: 0px;
 }
 .contact_field textarea {
-    width: 510px;
+    width: 490px;
     height: 100px;
     resize: none;
 }
