@@ -152,6 +152,9 @@ h1{
     vertical-align: middle;
     position: relative;
 }
+.help_icon_tooltip {
+    font-size: 80%;
+}
 .musik_zeit_label {
     width: 16em;
     float: left;
@@ -225,6 +228,12 @@ h1{
 #event_frame ul {
     margin-left: 2em;
     margin-top: 0px;
+}
+.ui-datepicker {
+    font-size: 80%;
+}
+.ui-timepicker {
+    font-size: 80%;
 }
 .contact_field {
     border: none;

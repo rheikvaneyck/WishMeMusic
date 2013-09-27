@@ -1,3 +1,7 @@
+:javascript
+  $(function() {
+    $( ".help_icon" ).tooltip({ tooltipClass: "help_icon_tooltip" });
+  });
 %h1 Musikwahl  
 %h2 Hintergrundmusik
 
@@ -13,7 +17,7 @@
             #bg_label
               %label #{hinter}
             #bg_image
-              %img{:src => 'images/help.png', :class => 'help_icon', :onmouseover => "tooltip.pop(this, '#{@descriptions[hinter]}')"}
+              %img{:src => 'images/help.png', :class => 'help_icon', :title => "#{@descriptions[hinter]}"}
     #confirm
       %input{:type=>"Reset", :class=>"clean_input"}
       %input{:type=>"Submit", :class=>"clean_input",:value=>"Weiter"}

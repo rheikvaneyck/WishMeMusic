@@ -6,11 +6,12 @@ end
 describe EmailBuilder do
 	it "html_email_builder renders the html email file from template" do
 		class User
-			attr_accessor :firstname, :name, :email
+			attr_accessor :firstname, :name, :email, :tel
 			def initialize
 				@firstname = "Hans"
 				@name = "Meier"
 				@email = "hans.meier@aol.com"
+				@tel = "01234567890"
 			end
 		end
 		class Wish
@@ -22,9 +23,17 @@ describe EmailBuilder do
 			end
 		end
 		class Event
-			attr_accessor :id
+			attr_accessor :id, :stadt, :strasse, :anzahl, :anzahl20, :anzahl60, :equipment, :beratung, :kommentar
 			def initialize
 				@id = "1"
+				@stadt = "Berlin"
+				@strasse = "Hauptstrasse 1"
+				@anzahl = 20
+				@anzahl20 = 3
+				@anzahl60 = 10
+				@equipment = true
+				@beratung = true
+				@kommentar = "Habe keine weiteren <b>Anmerkungen</b>."
 			end
 		end
 		class DJScore
@@ -50,11 +59,12 @@ describe EmailBuilder do
 		@event_time = "18:00h"
 
 
-		erb = ERB.new(File.read("email.html.erb"))
+		erb = ERB.new(File.read(File.join(File.dirname(__FILE__), "email.html.erb")))
 		body_html =  erb.result(binding)
-		File.open('email.html', 'w') do |f|
+		File.open(File.join(File.dirname(__FILE__), 'email.html'), 'w') do |f|
 			f.write(body_html)
 		end
-		File.exists?('email.html')
+
+		File.exists?(File.join(File.dirname(__FILE__), 'email.html'))
 	end
 end

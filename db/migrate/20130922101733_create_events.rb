@@ -3,6 +3,8 @@ class CreateEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.date :datum
       t.time :zeit
+      t.time :dj_start_zeit
+      t.time :dj_ende_zeit
       t.string :strasse
       t.string :stadt
       t.integer :anzahl
