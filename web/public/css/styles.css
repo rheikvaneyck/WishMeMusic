@@ -210,7 +210,7 @@ h1{
 #event_frame {
     border: 1px solid lightgrey;
     padding: 5px;
-    height: 30em;
+    height: 34em;
     margin-top: 2em;  
 }
 #event_frame_description {
@@ -253,6 +253,20 @@ h1{
 }
 .contact_input {
     float: left;
+}
+.contact_input input {
+    font-size: 1em;
+    border: 1px solid silver;
+    border-radius: 3px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ffffff));  
+    background: -moz-linear-gradient(top,  #eee,  #ffffff);  
+}
+.contact_input textarea {
+    font-size: 1em;
+    border: 1px solid silver;
+    border-radius: 3px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ffffff));  
+    background: -moz-linear-gradient(top,  #eee,  #ffffff);  
 }
 .clean_input {
     border: 1px solid #ddd;
