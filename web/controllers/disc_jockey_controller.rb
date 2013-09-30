@@ -5,6 +5,10 @@ require 'pony'
 require 'time'
 require 'disc_jockey'
 
+Dir[File.join(File.dirname(__FILE__), '..', 'models', '*.rb')].each do |file| 
+  require file 
+end
+
 class DiscJockeyController < ApplicationController
 
   get '/' do
@@ -90,9 +94,9 @@ class DiscJockeyController < ApplicationController
     surname.delete(lastname) unless lastname.nil?
     surname = surname.join(" ")
 
-    @u = DiscJockey::DBManager::User.find(:first, :conditions => [ "email = ?", params[:email]])
+    @u = User.find(:first, :conditions => [ "email = ?", params[:email]])
     
-    @u = DiscJockey::DBManager::User.create(
+    @u = User.create(
       :email  => params[:email],
       :tel => params[:tel],
       :name => lastname,
@@ -100,13 +104,13 @@ class DiscJockeyController < ApplicationController
       :email => params[:email],
       :role => 'user') if @u.nil?
 
-    @w = DiscJockey::DBManager::Wish.create(
+    @w = Wish.create(
       :background_musik => session[:hintergrund], 
       :tanzmusik_genre => session[:tanzmusik_genre], 
       :tanzmusik_zeit => session[:tanzmusik_zeit], 
       :user_id => @u.id)
 
-    @er = DiscJockey::DBManager::Event.new do |r|
+    @er = Event.new do |r|
       r.datum = params[:datum]
       r.zeit = params[:zeit]
       r.strasse = params[:strasse]
@@ -129,9 +133,9 @@ class DiscJockeyController < ApplicationController
     @id = params[:id]
 
     @db = DiscJockey::DBManager.new
-    @event = DiscJockey::DBManager::Event.find(@id)
-    @user = DiscJockey::DBManager::User.find(@event.user_id)
-    @wish = DiscJockey::DBManager::Wish.find(@event.wish_id)
+    @event = Event.find(@id)
+    @user = User.find(@event.user_id)
+    @wish = Wish.find(@event.wish_id)
 
     @event_date = Time.parse(@event.datum.to_s).strftime("%d. %b %Y") unless @event.datum.nil?
     @event_time = Time.parse(@event.zeit.to_s).strftime("%H:%M") unless @event.zeit.nil?
@@ -171,11 +175,11 @@ class DiscJockeyController < ApplicationController
     how_much = ["Nix", "Mittel", "Viel"]
     like_it = ["Lieber nicht", "Geht so", "Passt Super"]
     
-    @djs = DiscJockey::DBManager::User.find(:all, :conditions => [ "role = ?", "dj"])
+    @djs = User.find(:all, :conditions => [ "role = ?", "dj"])
     @djs_match = []
     @djs.each do |dj|
       if dj.aka_dj_name.nil? then dj.aka_dj_name = dj.name end
-      # FIXME: random scoring!!! Make a lib for that task
+      # FIXME: Make a lib for that task
       favour = dj.wishes.first
       score = 0
 
@@ -203,6 +207,7 @@ class DiscJockeyController < ApplicationController
         idx = favour.tanzmusik_genre.index(w[0])
         unless idx.nil?
           favour.tanzmusik_genre[idx..-1][/^([öä\w\s\/-]+:)\s*([\w\s]+)/]
+          logger.info favour.tanzmusik_genre[idx..-1] + ' ' + $2
           score = score + 2 - (how_much.index($2) - like_it.index(w[1].strip)).abs
         end
       end

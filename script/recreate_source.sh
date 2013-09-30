@@ -5,9 +5,9 @@ case "$1" in
  	"development")
 		GROUP="development" ;;
 	"test")
-		GROUP="development" ;;
+		GROUP="test" ;;
 	*)
-		GROUP="development" ;;
+		GROUP="production" ;;
 esac
 
 bundle --without $GROUP

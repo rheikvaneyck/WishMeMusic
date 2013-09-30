@@ -20,7 +20,7 @@ namespace :orga do
   end
   desc "Reset Source"
   task :reset do
-    files = %w(config/database.yml db/db.sqlite3 log/database.log bundle/config)
+    files = %w(db/db.sqlite3 log/database.log bundle/config)
     files.each do |f|
       puts "delete #{f}"
       File.delete(f) if File.exists?(f)
