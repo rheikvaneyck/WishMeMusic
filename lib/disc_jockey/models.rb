@@ -31,19 +31,6 @@ module DiscJockey
         ActiveRecord::Base.logger = Logger.new(File.open(File.join('log','database.log'), 'a'))
       end
       ActiveRecord::Base.establish_connection(db_config)
-
-    end
-    class Event < ActiveRecord::Base
-      belongs_to :wishes
-      belongs_to :users
-    end
-    class Wish < ActiveRecord::Base
-      has_one :event
-      belongs_to :users
-    end
-    class User < ActiveRecord::Base
-      has_many :wishes
-      has_many :events
     end
   end
 end
