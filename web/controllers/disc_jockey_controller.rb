@@ -11,6 +11,8 @@ end
 
 class DiscJockeyController < ApplicationController
 
+  include DiscJockey
+
   get '/' do
     haml :start
   end
@@ -87,7 +89,7 @@ class DiscJockeyController < ApplicationController
   end
 
   post '/kundendaten' do
-    @db = DiscJockey::DBManager.new
+    @db = DBManager.new
 
     lastname = (params[:name]).split(" ").last unless params[:name].nil?
     surname = (params[:name]).split(" ")
@@ -132,7 +134,7 @@ class DiscJockeyController < ApplicationController
   get '/abschluss' do
     @id = params[:id]
 
-    @db = DiscJockey::DBManager.new
+    @db = DBManager.new
     @event = Event.find(@id)
     @user = User.find(@event.user_id)
     @wish = Wish.find(@event.wish_id)
@@ -140,91 +142,18 @@ class DiscJockeyController < ApplicationController
     @event_date = Time.parse(@event.datum.to_s).strftime("%d. %b %Y") unless @event.datum.nil?
     @event_time = Time.parse(@event.zeit.to_s).strftime("%H:%M") unless @event.zeit.nil?
 
-=begin
-    # FIXME: Pony sendet ENTWEDER plain text ODER html
-
-    body_text = <<-END
-
-    Event-ID: #{@event.id}
-    Kunde: #{@user.firstname} #{@user.name}
-
-    Event am: #{@event_date} um #{@event_time} Uhr
-    
-    Hintergrund-Musik: 
-      #{@wish.background_musik.split(";").join("\n\t")}
-
-    Tanzmusik Genre: 
-      #{@wish.tanzmusik_genre.split(";").join("\n\t")}
-    
-    Tanzmusik Zeit: 
-      #{@wish.tanzmusik_zeit.split(";").join("\n\t")}
-
-    Kontakt: #{@user.email}
-    END
-=end
-    # FIXME: In lib auslagern
-    class DJScore
-      attr_accessor :dj, :score
-      def initialize(dj, score)
-        @dj = dj
-        @score = score
-      end
-    end
-
-    # FIXME: Lege die Kategorien in der DB oderconfig ab!
-    how_much = ["NoGo", "Nix", "Mittel", "Viel"]
-    like_it = ["Lieber nicht", "Geht so", "Ist OK", "Passt Super"]
-    
+    # FIXME: Lege die Kategorien in der DB oder config ab!
     @djs = User.find(:all, :conditions => [ "role = ?", "dj"])
-    @djs_match = []
-    @djs.each do |dj|
-      if dj.aka_dj_name.nil? then dj.aka_dj_name = dj.name end
-      # FIXME: Make a lib for that task
-      favour = dj.wishes.first
-      score = 0
-      exclude_flag = false
 
-      idx = favour.background_musik.index(@wish.background_musik)
-      # Wenn der Hintergrundwunsch in den Angeboten des DJ gefunden wird der Index im 
-      # String zurückgegeben. Mit dem kann der Substring per regulären Ausdruck danach 
-      # untersucht werden, wie gut das Angebot vom DJ ist. 
-      # z.B.
-      # @wish.background_musik = "Cafe del Mar"
-      # @favour.background_musik = "Bar Jazz: Mittel;Cafe del Mar: Viel;Chanson: Nix;Klassik: Nix;Kuba: Mittel;Lounge: Mittel;Aktuelles: Viel"
-      # --> idx = 17
-      # favour.background_musik[idx..-1][/^([\w\s]+:)\s*([\w\s]+)/] --> "Viel"
-      # $2 steht für den Treffer in der zweiten Klammer, und der steht im 
-      # how_much Array an 4. Stelle (Index 3), also ist how_much.index($2) --> 3
-      unless idx.nil?
-        favour.background_musik[idx..-1][/^([\w\s\/-]+:)\s*([\w\s]+)/]
-        score = score + how_much.index($2)
-        # Falls der Index 0 ist, wird jedoch das exclude_flag gesetzt:
-        exclude_flag = true if how_much.index($2) == 0
-      end
+    @ms = MatchScore.new(@wish, @djs)
 
+    dj_scale = ["NoGo", "Nix", "Mittel", "Viel"]
+    wish_scale = ["Lieber nicht", "Geht so", "Ist OK", "Passt Super"]
 
+    @ms.score(wish_scale, dj_scale)
 
-      wish_genre = @wish.tanzmusik_genre.split(";").map {|i| i.split(":")}
-      
-      wish_genre.each do |w|
-        idx = favour.tanzmusik_genre.index(w[0])
-        unless idx.nil?
-          favour.tanzmusik_genre[idx..-1][/^([öä\w\s\/-]+:)\s*([\w\s]+)/]
-          logger.info favour.tanzmusik_genre[idx..-1] + ' ' + $2
-          score = score + 2 - (how_much.index($2) - like_it.index(w[1].strip)).abs
-          exclude_flag = true if how_much.index($2) == 0
-        end
-      end
-      
-      # Der DJ wird nur aufgenommen, wenn exclude_flag nicht auf true gesetzt wurde:
-      @djs_match << DJScore.new(dj.aka_dj_name, score) unless exclude_flag
-
-    end
-    @djs_match.sort! {|x,y| x.score <=> y.score}.reverse!
-    @max_score = @djs_match.max { |x,y| x.score <=> y.score}
     erb = ERB.new(File.read("web/views/email.html.erb"))
-    body_html =  erb.result(binding)
-    # END: In lib auslagern
+    body_html =  erb.result(binding)s
 
     mailer_config = YAML.load_file(File.join('config','email.yml'))
 

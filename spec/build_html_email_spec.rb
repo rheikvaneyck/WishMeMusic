@@ -65,6 +65,7 @@ describe EmailBuilder do
 			f.write(body_html)
 		end
 
+		# The Test:
 		File.exists?(File.join(File.dirname(__FILE__), 'email.html'))
 	end
 end
