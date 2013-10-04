@@ -7,14 +7,25 @@
     padding: 10px;
     border-bottom: 1px solid #ddd;  
 }  
-  
+#icon {
+    position: relative;
+    top: 10px;
+    right: 10px;
+    float: right;
+} 
+#icon img {
+    width: 95px;
+} 
 #header>h1{  
     font-size:200%;
+    margin-bottom: 0px;
 }
 #header p {
     padding-left: 40px;
     color: #aab;
     font-size: small;
+    margin-top: 0px;
+    margin-bottom: 0.2em;
 }
 
 #content>h1{  
@@ -24,7 +35,10 @@
 
 h2{  
     font-size:130%;  
-    font-family:sans-serif;  
+    font-family:sans-serif;
+    font-weight: normal;
+    margin-bottom: 0px;
+    text-align: right;  
 }
 
 h3{  
@@ -58,15 +72,20 @@ h1{
 #footer{  
     clear:both;
     padding-top: 10px;  
-    font-size: small;  
+    font-size: x-small;  
     font-family:sans-serif;  
     color: #aab;  
     border-top:solid 1px #ddd;  
     text-align: center;
 }  
+
+#footer p {
+    margin: 0px;
+}
   
 #sidebar ul{  
-    padding-top:10px;    
+    padding-top:10px; 
+    list-style: none;   
 }  
 
 #sidebar li{  
@@ -77,9 +96,16 @@ h1{
 }
 #content ul {
     margin-top: 20px;
+    list-style: none;
+    padding: 0px;
 }
 #content li {
     line-height: 2em;
+}
+.content_field textarea {
+    width: 510px;
+    height: 100px;
+    resize: none;
 }
 
 #confirm {
@@ -88,12 +114,43 @@ h1{
 }
 
 #wish_form {
-    margin-top: 20px;
+    margin-top: 0px;
     padding: 20px;
     border: 1px solid #ddd;
     box-shadow: 5px 5px 3px #dfdfdf;
     border-radius: 5px;
-    font-size: 90%;
+    font-size: 85%;
+    font-family: sans-serif;
+}
+#bg_group {
+    clear: both;
+    margin-left: 50px;
+}
+#bg_radio {
+    width: 20;
+    height: 2em;
+    float: left;
+    vertical-align: middle;
+    padding-top: 5px;
+}
+#bg_label {
+    width: 8em;
+    height: 2em;
+    float: left;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+#bg_image {
+    width: 20px;
+    height: 2em;
+    float: left;
+    vertical-align: middle;
+    padding-top: 5px;
+}
+.help_icon {
+    width: 16px;
+    vertical-align: middle;
+    position: relative;
 }
 .musik_zeit_label {
     width: 16em;
@@ -102,13 +159,14 @@ h1{
 .musik_zeit_opts {
     float: left;
 }
+.survey_table{
+    width: 100%;
+}
 .survey_table td:first-child {
     width: 10em;
-    font-weight: bold;
     text-align: left;
 }
 .survey_table th{
-    font-weight: bold;
     text-align: center;
     width: 7em;
     line-height: 1.5em;
@@ -125,11 +183,63 @@ h1{
     line-height: 2em;
     vertical-align: middle;
 }
+#personal_frame {
+    border: 1px solid lightgrey;
+    padding: 5px;
+    height: 8em;
+}
+#personal_frame_description {
+    position: relative;
+    font-size: small;
+    background-color: #fff;
+    top: -1em;
+    left: 1.5em;
+    width: 10em;
+    height: 1.5em;
+    text-align: center;
+    border: 1px solid lightgrey;
+    color: darkgray;
+}
+#personal_frame ul {
+    margin-left: 2em;
+    margin-top: 0px;
+}
+#event_frame {
+    border: 1px solid lightgrey;
+    padding: 5px;
+    height: 30em;
+    margin-top: 2em;  
+}
+#event_frame_description {
+    position: relative;
+    font-size: small;
+    background-color: #fff;
+    top: -1em;
+    left: 1.5em;
+    width: 15em;
+    height: 1.5em;
+    text-align: center;
+    border: 1px solid lightgrey;
+    color: darkgray;
+}
+#event_frame ul {
+    margin-left: 2em;
+    margin-top: 0px;
+}
+.contact_field {
+    border: none;
+    padding: 0px;
+}
+.contact_field textarea {
+    width: 490px;
+    height: 100px;
+    resize: none;
+}
 .contact_box {
     clear: both;
 }
 .contact_label {
-    width: 20em;
+    width: 18em;
     float: left;
 }
 .contact_input {
@@ -155,4 +265,27 @@ a{
     width: 10em;
     font-weight: bold;
     font-family: sans-serif;
+}
+.abschluss_text {
+    margin-top: 4em;
+}
+.abschluss_confirm {
+    font-weight: normal;
+    font-size: 150%;
+}
+.abschluss_email {
+    color: darkblue;
+    font-weight: bold;
+}
+.abschluss_greeting {
+    margin-top: 4em;
+}
+.abschluss_djhey {
+    position: relative;
+    bottom: 100px;
+    right: 0px;
+    float: right;
+}
+.abschluss_djhey img {
+    width: 400px;
 }

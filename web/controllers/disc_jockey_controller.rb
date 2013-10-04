@@ -13,6 +13,17 @@ class DiscJockeyController < ApplicationController
 
   get '/hintergrund' do  
     @hintergr = ['Bar Jazz','Cafe del Mar', 'Chanson', 'Klassik', 'Kuba', 'Lounge', 'Aktuelles']
+    puts @hintergr[0]
+    @descriptions = {
+      @hintergr[0] => "Bar Jazz ist...",
+      @hintergr[1] => "Cafe del Mar ist...",
+      @hintergr[2] => "Chanson ist...",
+      @hintergr[3] => "Klassik ist...",
+      @hintergr[4] => "Kuba ist...",
+      @hintergr[5] => "Lounge ist...",
+      @hintergr[6] => "Aktuelles ist..."
+    }
+
     haml :hintergrund
   end
 
@@ -122,8 +133,8 @@ class DiscJockeyController < ApplicationController
     @user = DiscJockey::DBManager::User.find(@event.user_id)
     @wish = DiscJockey::DBManager::Wish.find(@event.wish_id)
 
-    @event_date = Time.parse(@event.datum.to_s).strftime("%d. %b %Y")
-    @event_time = Time.parse(@event.zeit.to_s).strftime("%H:%M")
+    @event_date = Time.parse(@event.datum.to_s).strftime("%d. %b %Y") unless @event.datum.nil?
+    @event_time = Time.parse(@event.zeit.to_s).strftime("%H:%M") unless @event.zeit.nil?
 
 =begin
     # FIXME: Pony sendet ENTWEDER plain text ODER html
@@ -156,12 +167,48 @@ class DiscJockeyController < ApplicationController
       end
     end
 
+    # FIXME: Lege die Kategorien in der DB oderconfig ab!
+    how_much = ["Nix", "Mittel", "Viel"]
+    like_it = ["Lieber nicht", "Geht so", "Passt Super"]
+    
     @djs = DiscJockey::DBManager::User.find(:all, :conditions => [ "role = ?", "dj"])
     @djs_match = []
     @djs.each do |dj|
       if dj.aka_dj_name.nil? then dj.aka_dj_name = dj.name end
       # FIXME: random scoring!!! Make a lib for that task
-      @djs_match << DJScore.new(dj.aka_dj_name, rand(5))
+      favour = dj.wishes.first
+      score = 0
+
+      idx = favour.background_musik.index(@wish.background_musik)
+      # Wenn der Hintergrundwunsch in den Angeboten des DJ gefunden wird der Index im 
+      # String zurückgegeben. Mit dem kann der Substring per regeulären Ausdruck danach 
+      # untersucht werden, wie gut das Angebot vom DJ ist. 
+      # z.B.
+      # @wish.background_musik = "Cafe del Mar"
+      # @favour.background_musik = "Bar Jazz: Mittel;Cafe del Mar: Viel;Chanson: Nix;Klassik: Nix;Kuba: Mittel;Lounge: Mittel;Aktuelles: Viel"
+      # --> idx = 17
+      # favour.background_musik[idx..-1][/^([\w\s]+:)\s*([\w\s]+)/] --> "Viel"
+      # $2 steht für den Treffer in der zweiten Klammer, also ist 
+      # how_much.index($2) --> 2
+      unless idx.nil?
+        favour.background_musik[idx..-1][/^([\w\s\/-]+:)\s*([\w\s]+)/]
+        score = score + how_much.index($2)
+      end
+
+
+
+      wish_genre = @wish.tanzmusik_genre.split(";").map {|i| i.split(":")}
+      
+      wish_genre.each do |w|
+        idx = favour.tanzmusik_genre.index(w[0])
+        unless idx.nil?
+          favour.tanzmusik_genre[idx..-1][/^([öä\w\s\/-]+:)\s*([\w\s]+)/]
+          score = score + 2 - (how_much.index($2) - like_it.index(w[1].strip)).abs
+        end
+      end
+      
+      @djs_match << DJScore.new(dj.aka_dj_name, score)
+
     end
     @djs_match.sort! {|x,y| x.score <=> y.score}.reverse!
     @max_score = @djs_match.max { |x,y| x.score <=> y.score}

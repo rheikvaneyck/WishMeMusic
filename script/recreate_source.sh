@@ -1,6 +1,16 @@
 #!/bin/bash
+case "$1" in 
+	"production")
+		GROUP="production" ;;
+ 	"development")
+		GROUP="development" ;;
+	"test")
+		GROUP="development" ;;
+	*)
+		GROUP="development" ;;
+esac
 
-bundle --without production
+bundle --without $GROUP
 
 cd config
 
@@ -13,4 +23,4 @@ cd ..
 
 bundle exec rake db:migrate
 
-#bundle exec rake db:load_djs	
+bundle exec rake db:load_djs	
