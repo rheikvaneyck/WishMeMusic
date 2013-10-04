@@ -30,7 +30,6 @@ describe MatchScore do
   end
 
   it "should return best match score" do
-    # The Tests:key => "value", 
     expect(@ms.max_score.score).to eq(15)
   end
 

@@ -4,7 +4,8 @@ class EmailBuilder
 end
 
 describe EmailBuilder do
-	it "html_email_builder renders the html email file from template" do
+	# Prepare tests
+	before(:all) do
 		class User
 			attr_accessor :firstname, :name, :email, :tel
 			def initialize
@@ -58,14 +59,30 @@ describe EmailBuilder do
 		@event_date = "28. Aug 2014"
 		@event_time = "18:00h"
 
+		@email_report = File.join(File.dirname(__FILE__), 'email.html')
+		@email_template = File.join(File.dirname(__FILE__), "email.html.erb")
 
-		erb = ERB.new(File.read(File.join(File.dirname(__FILE__), "email.html.erb")))
+		erb = ERB.new(File.read(@email_template))
 		body_html =  erb.result(binding)
-		File.open(File.join(File.dirname(__FILE__), 'email.html'), 'w') do |f|
+		File.open(@email_report, 'w') do |f|
 			f.write(body_html)
 		end
+	end
 
-		# The Test:
-		File.exists?(File.join(File.dirname(__FILE__), 'email.html'))
+	# Tests
+	it "renders the html email file from template" do
+		expect(File.exists?(@email_report)).to be true
+	end
+
+	it "max score should be greater 0" do
+		expect(@max_score.score).to be > 0
+	end
+
+	it "one DJ from list shoud have max score" do
+		expect(%W{John Jack James Jim Joe}).to include(@max_score.dj)
+	end
+
+	it "list of matching DJs should have 5 items" do
+		expect(@djs_match.length).to be 5
 	end
 end
