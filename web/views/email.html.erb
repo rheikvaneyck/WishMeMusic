@@ -92,13 +92,18 @@
         <tr>
             <td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;background-color: darkgrey;color: white;font-weight: bold" colspan="2">DJs match:</td>
         </tr>
-        <% @djs_match.each do |d| %>
+        <% @ms.djs_match.each do |d| %>
             <tr class="list">
-                <% if (d.score == @max_score.score) then %>
+                <% if (d.score == @ms.max_score.score) then %>
                     <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;color: darkgreen;font-weight: bold;'>#{d.dj}</td><td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;color: darkgreen;font-weight: bold;'>#{d.score}</td>" %>
                 <% else %> 
                     <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;'>#{d.dj}</td><td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;'>#{d.score}</td>" %>
                 <% end %>
+            </tr>
+        <% end %>
+        <% if @ms.djs_match.empty? then %>
+            <tr class="list">
+                <td style='line-height: 2em;padding-left: 2em;padding-right: 2em;font-weight:bold;color: red;' colspan="2">Keinen passenden DJ gefunden</td>
             </tr>
         <% end %>
     </table>
