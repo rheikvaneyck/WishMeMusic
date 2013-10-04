@@ -23,6 +23,7 @@ describe ReportMailer do
         :domain => mailer_config["domain"]
       }
 
+      # The Test:
       Pony.mail(:to => mailer_config["to"], 
         :cc => mailer_config["cc"], 
         :from => mailer_config["from"],
@@ -30,6 +31,7 @@ describe ReportMailer do
         :content_type => "text/html",
         :body => body_html)
     else
+      # The alternate static Test:
       puts '---'
       puts "This test needs real credentials and server options for a smtp server."
       puts "Contents of #{config_file} should be something similar to this:"

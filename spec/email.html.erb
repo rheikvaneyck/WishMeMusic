@@ -101,6 +101,11 @@
                 <% end %>
             </tr>
         <% end %>
+        <% if @djs_match.empty? then %>
+            <tr class="list">
+                <td style='line-height: 2em;padding-left: 2em;padding-right: 2em;font-weight:bold;color: red;' colspan="2">Keinen passenden DJ gefunden</td>
+            </tr>
+        <% end %>
     </table>
 </body>
 </html>

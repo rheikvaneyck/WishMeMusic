@@ -1,0 +1,6 @@
+development:
+  adapter: sqlite3
+  database: spec/test_data/test_data.sqlite3
+  timeout: 15000
+  
+log_dir: "spec/test_data/"
