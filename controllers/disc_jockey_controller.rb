@@ -52,10 +52,11 @@ class DiscJockeyController < ApplicationController
   end
 
   post '/tanzmusik_zeit' do
-    # HINWEIS: keine Werte, wenn radiobutton nicht geklickt
+    @categories = ["Passt Super", "Geht so", "Ist Ok", "Lieber nicht"]
+    @times = ['20/30/40er Jahre', '50/60er Jahre', '70er Jahre', '80er Jahre', '90er Jahre', '2000 bis heute']
     str = []
     params.each do |key, value|
-      str << "#{key}: #{value}"
+      str << "#{key}: #{value}" if @times.include?(key) and @categories.include?(value)
     end
     session[:tanzmusik_zeit] = str.join(";")
     redirect '/tanzmusik_genre'
@@ -68,9 +69,11 @@ class DiscJockeyController < ApplicationController
   end
 
   post '/tanzmusik_genre' do
+    @categories = ["Passt Super", "Geht so", "Ist Ok", "Lieber nicht"]
+    @genres = ['Aktuelle Charts', 'POP International', 'POP Deutsch', 'Rock Oldies', 'Rock Modern', 'Rock Deutsch', 'Alternative', 'Soul/Funk', 'Latino', 'House/Techno', 'Hip Hop International', 'Hip Hop Deutsch','World-Musik', 'Kölsches Tön', 'Schlager/NDW', 'Mallorca/Apres-Ski', 'Standard-Tänze']     
     str = []
     params.each do |key, value|
-      str << "#{key}: #{value}"
+      str << "#{key}: #{value}" if @genres.include?(key) and @categories.include?(value)
     end    
     session[:tanzmusik_genre] = str.join(";")
   	redirect '/kundendaten'
@@ -90,7 +93,7 @@ class DiscJockeyController < ApplicationController
 
   post '/kundendaten' do
     @db = DBManager.new
-
+    
     lastname = (params[:name]).split(" ").last unless params[:name].nil?
     surname = (params[:name]).split(" ")
     surname.delete(lastname) unless lastname.nil?
@@ -99,11 +102,10 @@ class DiscJockeyController < ApplicationController
     @u = User.find(:first, :conditions => [ "email = ?", params[:email]])
     
     @u = User.create(
-      :email  => params[:email],
-      :tel => params[:tel],
       :name => lastname,
       :firstname => surname,
-      :email => params[:email],
+      :email  => params[:email],
+      :tel => params[:tel],
       :role => 'user') if @u.nil?
 
     @w = Wish.create(
