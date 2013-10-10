@@ -94,8 +94,9 @@ class DiscJockeyController < ApplicationController
   post '/kundendaten' do
     @db = DBManager.new
     
-    lastname = (params[:name]).split(" ").last unless params[:name].nil?
-    surname = (params[:name]).split(" ")
+    
+    surname = (params[:name]).split(" ") unless params[:name].nil?
+    lastname = surname.last unless surname.nil?
     surname.delete(lastname) unless lastname.nil?
     surname = surname.join(" ")
 
@@ -155,7 +156,7 @@ class DiscJockeyController < ApplicationController
     @ms.score(wish_scale, dj_scale)
 
     erb = ERB.new(File.read("web/views/email.html.erb"))
-    body_html =  erb.result(binding)s
+    body_html =  erb.result(binding)
 
     mailer_config = YAML.load_file(File.join('config','email.yml'))
 

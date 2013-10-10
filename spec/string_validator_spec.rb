@@ -13,52 +13,53 @@ describe StringValidator do
 			"\'code injection\'", 
 			"Müller", 
 			"René", 
-			"O\'Reilly",
+			"O'Reilly",
 			"Müller-Lüdenscheid",
 			"-Lüdenscheid",
 			"#()§$\'"
 		]
 	end
 
-	it "should extract only valid strings for names from input" do
-		expect(@names[0].validate_purpose(:name)).to eq("James")
+	it "extracts only valid strings for names from input" do
+		expect(@names[0].filter_purpose(:name)).to eq("James")
 	end
 	
 	it "should filter xml-code from input" do
-		expect(@names[1].validate_purpose(:name)).to eq("xml-code")
+		expect(@names[1].filter_purpose(:name)).to eq("xml-code")
 	end
 
 	it "should avoid code injection" do
-		expect(@names[2].validate_purpose(:name)).to eq("code injection")
+		expect(@names[2].filter_purpose(:name)).to eq("code injection")
 	end
 
 	it "should regognize umlauts" do
-		expect(@names[3].validate_purpose(:name)).to eq("Müller")
+		expect(@names[3].filter_purpose(:name)).to eq("Müller")
 	end
 
 	it "should regonize accent aigu" do
-		expect(@names[4].validate_purpose(:name)).to eq("René")
+		expect(@names[4].filter_purpose(:name)).to eq("René")
 	end
 	
 	it "should regonize apostrophes in names" do
-		expect(@names[5].validate_purpose(:name)).to eq("O\'Reilly")
+		expect(@names[5].filter_purpose(:name)).to eq("O'Reilly")
 	end
 
 	it "should regonize combined names" do
-		expect(@names[6].validate_purpose(:name)).to eq("Müller-Lüdenscheid")
+		expect(@names[6].filter_purpose(:name)).to eq("Müller-Lüdenscheid")
 	end
 
 	it "should ignore starting symbols" do
-		expect(@names[7].validate_purpose(:name)).to eq("Lüdenscheid")
+		expect(@names[7].filter_purpose(:name)).to eq("Lüdenscheid")
 	end
 
 	it "should ignore starting symbols" do
-		expect(@names[8].validate_purpose(:name)).to be_empty
+		expect(@names[8].filter_purpose(:name)).to be_empty
 	end
 end
 
 describe StringValidator do
 	# Test for emails
+	# but don't accept string which are not emails
 
 	before(:all) do
 		@emails = ["harry.klein@gmail.com",
@@ -69,30 +70,31 @@ describe StringValidator do
 		]
 	end
 
-	it "should extract valid emails" do
-		expect(@emails[0].validate_purpose(:email)).to eq("harry.klein@gmail.com")
+	it "extracts valid emails" do
+		expect(@emails[0].filter_purpose(:email)).to eq("harry.klein@gmail.com")
 	end
 
-	it "should extract valid emails with numbers" do
-		expect(@emails[1].validate_purpose(:email)).to eq("liese1981@aol.com")
+	it "extracts valid emails with numbers" do
+		expect(@emails[1].filter_purpose(:email)).to eq("liese1981@aol.com")
 	end
 
-	it "should extract valid emails with numbers" do
-		expect(@emails[2].validate_purpose(:email)).to eq("dr.klein@labs.dach.acme.com")
+	it "extracts valid emails with numbers" do
+		expect(@emails[2].filter_purpose(:email)).to eq("dr.klein@labs.dach.acme.com")
 	end
 
-	it "should extract valid emails with numbers" do
-		expect(@emails[3].validate_purpose(:email)).to eq("james.johnson@yahoo.com")
+	it "extracts valid emails with numbers" do
+		expect(@emails[3].filter_purpose(:email)).to eq("james.johnson@yahoo.com")
 	end
 
-	it "should extract valid emails with numbers" do
-		expect(@emails[4].validate_purpose(:email)).to be_empty
+	it "extracts valid emails with numbers" do
+		expect(@emails[4].filter_purpose(:email)).to be_empty
 	end
 end
 
 describe StringValidator do
-	# Test for emails
-
+	# Test for valid phone numbers
+	# to accept all possible entries users could make 
+	# but avoid fake or malicious input
 	before(:all) do
 		@tel = [
 			"+49 (0)30 12345677",
@@ -116,9 +118,60 @@ describe StringValidator do
 		]
 	end
 
-	it "should extract valid phone numbers" do
+	it "extracts valid phone numbers" do
 		@tel.each do |t|
-			expect(t.validate_purpose(:tel)).to eq(t)
+			expect(t.filter_purpose(:tel)).to eq(t)
+		end
+	end
+end
+
+describe StringValidator do
+	# Test for valid date entries
+	# to accept all possible entries users could make 
+	# but avoid fake or malicious input
+	before(:all) do
+		@daten = [
+			"01.01.2013",
+			"1.01.2013",
+			"1.1.2013",
+			"1.1.13",
+			"1.01.13",
+			"01/01/2013",
+			"01-01-2013",
+			"01 01 2013",
+			"1. August 2013",
+			"1. Aug 2013",
+			"1. August 13",
+			"01.August 2013",
+			"01. August 2013"
+		]
+	end
+	it "extracts valid dates" do
+		@daten.each do |d|
+			expect(d.filter_purpose(:datum)).to eq(d)
+		end
+	end
+end
+
+describe StringValidator do
+	# Test for valid time entries
+	# to accept all possible entries users could make 
+	# but avoid fake or malicious input
+	before(:all) do
+		@daten = [
+			"18:00",
+			"18.00",
+			"18/00",
+			"18-00",
+			"8:00",
+			"8.0",
+			"1800",
+			"18",
+		]
+	end
+	it "extracts valid dates" do
+		@daten.each do |d|
+			expect(d.filter_purpose(:zeit)).to eq(d)
 		end
 	end
 end
