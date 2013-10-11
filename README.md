@@ -12,7 +12,7 @@ take a look on the [wiki](https://github.com/rheikvaneyck/WishMeMusic/wiki) how 
 Screenshot
 ----------
 
-![Screenshot](screen.png)
+![Screenshot](wishmemusic_screen.png)
 
 
 License

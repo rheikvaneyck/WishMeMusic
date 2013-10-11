@@ -1,3 +1,11 @@
+:javascript
+  $.datepicker.setDefaults( $.datepicker.regional[ "de" ] );
+  $(function() {
+    $( "#input_event_datum" ).datepicker({});
+  });
+  $(function() {
+    $('#input_event_zeit, #input_dj_start_zeit, #input_dj_ende_zeit').timepicker({ 'minTime': '1:00', 'maxTime': '24:00', 'timeFormat': 'G:i', 'className': 'ui-timepicker'});
+  });
 %h1 Kontakt aufnehmen
 
 #wish_form
@@ -34,13 +42,21 @@
               %div{:class=>"contact_label"}
                 %label{:for => "datum"} Veranstaltungs Datum * :
               %div{:class=>"contact_input"}
-                %input{:type => "date", :name => "datum", :required => true}
+                %input{:type => "text", :name => "datum", :id => "input_event_datum", :required => true}
           %li
             %div{:class=>"contact_box"}
               %div{:class=>"contact_label"}
                 %label{:for => "zeit"} Veranstaltungs Anfang:
               %div{:class=>"contact_input"}
-                %input{:type => "time", :name => "zeit"}
+                %input{:type => "text", :name => "zeit", :id => "input_event_zeit", :size => "6"}  &nbsp; Uhr
+          %li
+            %div{:class => "contact_box"}
+              %div{:class => "contact_label"}
+                %label{:for => "dj_start_time"} DJ soll auflegen von:
+              %div{:class => "contact_input"}
+                %input{:type => "text", :name => "dj_start_zeit", :id => "input_dj_start_zeit", :size => "6"}
+                &nbsp;bis:&nbsp;&nbsp;
+                %input{:type => "text", :name => "dj_start_zeit", :id => "input_dj_ende_zeit", :size => "6"}
           %li
             %div{:class=>"contact_box"}
               %div{:class=>"contact_label"}
@@ -87,7 +103,8 @@
             %div{:class=>"contact_box"}
               %div{:class=>"contact_label"}
                 %label{:for => "message"} Sonstiges:
-            %textarea{:name => "message"}
+              %div{:class=>"contact_input"}
+                %textarea{:name => "message"}
       #confirm      
         %input{:type=>"Reset", :class=>"clean_input"}
         %input{:type => "submit", :class=>"clean_input", :value => "Send"}            
