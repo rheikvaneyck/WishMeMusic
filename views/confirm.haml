@@ -1,0 +1,83 @@
+%h1 Bestätigen
+
+#wish_form
+  %table{:id => "confirm_table"}
+    %tr
+      %td{:colspan => "2", :class => "sub_header"} Persönliche Daten
+    -# %tr
+      -# %td Event-ID
+      -# %td= CGI::escape_html("#{@event.id}")
+    %tr
+      %td Name:
+      %td= CGI::escape_html("#{@user.firstname} #{@user.name}")
+    %tr
+      %td E-Mail:
+      %td= CGI::escape_html("#{@user.email}")
+    %tr
+      %td Telefon:
+      %td= CGI::escape_html("#{@user.tel}")
+    %tr
+      %td{:colspan => "2", :class => "sub_header"}Event
+    %tr
+      %td Event am:
+      %td= CGI::escape_html("#{@event_date} um #{@event_time} Uhr")
+    %tr
+      %td Ort:
+      %td= CGI::escape_html("#{@event.strasse}, #{@event.stadt}")
+    %tr
+      %td Anzahl der Gäste:
+      %td= CGI::escape_html("#{@event.anzahl}")
+    %tr
+      %td Anzahl der Gäste unter 20:
+      %td= CGI::escape_html("#{@event.anzahl20}")
+    %tr
+      %td Anzahl der Gäste über 60:
+      %td= CGI::escape_html("#{@event.anzahl60}")
+    %tr
+      %td Equipment:
+      %td= CGI::escape_html("#{@event.equipment ? 'vorhanden' : 'erwünscht'}")
+    %tr
+      %td Beratung:
+      %td= CGI::escape_html("#{@event.equipment ? 'erwünscht' : 'nicht nötig'}")
+    %tr
+      %td Sonstiges:
+      %td= CGI::escape_html("#{@event.kommentar}")
+    %tr
+      %td{:colspan => "2", :class => "sub_header"} Hintergrund-Musik:
+    - # FIXME: error in this piece of code?
+    - @wish.background_musik.split(";").each do |bm|
+      %tr
+        - bm.split(":").each do |m|
+          %td= CGI::escape_html("#{m.strip}")
+    %tr
+      %td{:colspan => "2", :class => "sub_header"} Tanzmusik Genre:
+    - @wish.tanzmusik_genre.split(";").each do |bm|
+      %tr
+        - bm.split(":").each do |m|
+          - if (m.strip == "Passt Super") then
+            %td{:class => "colored"}= m.strip
+          - elsif (m.strip == "Lieber nicht") then
+            %td{:class => "greyed"}= m.strip
+          - else
+            %td= m.strip
+    %tr
+      %td{:colspan => "2", :class => "sub_header"} Tanzmusik Zeit:
+    - @wish.tanzmusik_zeit.split(";").each do |bm|
+      %tr
+        - bm.split(":").each do |m|
+          - if (m.strip == "Passt Super") then
+            %td{:class => "colored"}= m.strip
+          - elsif (m.strip == "Lieber nicht") then
+            %td{:class => "greyed"}= m.strip      
+          - else
+            %td= m.strip
+  #choice
+    %div{:class => "confirm_form"}
+      %form{:action => "/confirm", :method => "post"}
+        %input{:type => "submit", :class=>"clean_input", :value => "Geht klar!"}
+    -# %div{:class => "confirm_form"}
+      -# %form{:action => "/update", :method => "post"}
+        -# %input{:type => "submit", :class=>"clean_input", :value => "Bearbeiten"}
+    %div{:class => "confirm_form"}
+      %form{:action => "/cancel", :method => "post"}
+        %input{:type => "submit", :class=>"clean_input", :value => "Abrechen"}

@@ -14,7 +14,7 @@
 - add tests
 	+ done: create spec files
 	+ create usecases
-- write a wiki
+- write a wilki
 	+ done: base configuration
 	+ done: how to clone source and use git
 	+ describe architecture
