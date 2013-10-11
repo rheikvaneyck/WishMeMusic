@@ -93,7 +93,54 @@ class DiscJockeyController < ApplicationController
 
   post '/kundendaten' do
     @db = DBManager.new
-    
+    # Get the parameters for further parsing
+    name = params[:name]
+    email = params[:email]
+    tel = params[:tel]
+    datum = params[:datum]
+    zeit = params[:zeit]
+    strasse = params[:strasse]
+    stadt = params[:stadt]
+    anzahl = params[:anzahl]
+    anzahl20 = params[:unter20]
+    anzahl60 = params[:ueber60]
+    equipment = params[:equipment]
+    beratung = params[:beratung]
+    kommentar = params[:message] 
+
+    hardening = :medium
+
+    case hardening 
+    when :secure
+      name = params[:name].filter_purpose(:name)
+      email = params[:email].filter_purpose(:email)
+      tel = params[:tel].filter_purpose(:tel)
+      datum = params[:datum].filter_purpose(:datum)
+      zeit = params[:zeit].filter_purpose(:zeit)
+      strasse = params[:strasse].filter_purpose(:street)
+      stadt = params[:stadt].filter_purpose(:city)
+      anzahl = params[:anzahl].filter_purpose(:numbers)
+      anzahl20 = params[:unter20].filter_purpose(:numbers)
+      anzahl60 = params[:ueber60].filter_purpose(:numbers)
+      equipment = params[:equipment].filter_purpose(:word)
+      beratung = params[:beratung].filter_purpose(:word)
+      # Here is a vulnerability:
+      kommentar = CGI::escape_html(params[:message])
+    when :medium
+      name = CGI::escape_html(params[:name])
+      email = CGI::escape_html(params[:email])
+      tel = CGI::escape_html(paramsCGI::escape_html([:tel])
+      datum = CGI::escape_html(params[:datum])
+      zeit = CGI::escape_html(params[:zeit])
+      strasse = CGI::escape_html(params[:strasse])
+      stadt = CGI::escape_html(params[:stadt])
+      anzahl = CGI::escape_html(params[:anzahl])
+      anzahl20 = CGI::escape_html(params[:unter20])
+      anzahl60 = CGI::escape_html(params[:ueber60])
+      equipment = CGI::escape_html(params[:equipment])
+      beratung = CGI::escape_html(params[:beratung])
+      kommentar = CGI::escape_html(params[:message])
+    end      
     
     surname = (params[:name]).split(" ") unless params[:name].nil?
     lastname = surname.last unless surname.nil?

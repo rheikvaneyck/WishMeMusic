@@ -175,3 +175,38 @@ describe StringValidator do
 		end
 	end
 end
+describe StringValidator do
+	# Test for valid street entries
+	# to accept all possible entries users could make 
+	# but avoid fake or malicious input
+	before(:all) do
+		@daten = [
+			"Am Plan 3c",
+			"Hauptstr. 4 1/2",
+			"A-Weg 8"
+		]
+	end
+	it "extracts valid streets" do
+		@daten.each do |d|
+			expect(d.filter_purpose(:street)).to eq(d)
+		end
+	end
+end
+describe StringValidator do
+	# Test for valid city entries
+	# to accept all possible entries users could make 
+	# but avoid fake or malicious input
+	before(:all) do
+		@daten = [
+			"Berlin",
+			"Halle/Saale",
+			"Frankfurt am Main",
+			"München a. d. Isar"
+		]
+	end
+	it "extracts valid streets" do
+		@daten.each do |d|
+			expect(d.filter_purpose(:city)).to eq(d)
+		end
+	end
+end
