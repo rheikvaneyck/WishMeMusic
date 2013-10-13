@@ -22,7 +22,7 @@ namespace :deploy do
   task :build_gems do
     on roles(:app) do |host|
       within release_path do
-        execute :bundle, "install --deployment"
+        execute :bundle, "install --deployment --without=development"
       end
     end
   end
@@ -30,8 +30,6 @@ namespace :deploy do
   desc "Migrating database"
   task :migrations do
     on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
       within release_path do
         execute :rake, "db:migrate"
       end

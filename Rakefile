@@ -113,7 +113,12 @@ namespace :web do
   end
   desc "Stop the sinatra app"
   task :stop do
-    system("[ -e /proc/$(cat log/rack.pid) ] ;  kill -9 `cat log/rack.pid`")
+    if File.exists?('log/rack.pid') then
+      pid = File.read('log/rack.pid') 
+      if File.exists?("/proc/#{pid}") then
+        Process::kill("SIGINT", pid)
+      end
+    end
   end
 end
 
