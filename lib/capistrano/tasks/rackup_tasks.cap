@@ -1,0 +1,17 @@
+namespace :rackup do
+  desc "Start private_pub server"
+  task :start do
+    run "cd #{current_path}; bundle exec rackup -Ilib -s thin -p 4567 -E production -P tmp/pids/rack.pid config.ru"
+  end
+   
+  desc "Stop private_pub server"
+  task :stop do
+  run "cd #{current_path};if [ -f tmp/pids/rack.pid ] && [ -e /proc/$(cat tmp/pids/rack.pid) ]; then kill -9 `cat tmp/rack.pid`; fi"
+  end
+   
+  desc "Restart private_pub server"
+  task :restart do
+    stop
+    start
+  end
+end
