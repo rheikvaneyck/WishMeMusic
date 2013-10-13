@@ -19,13 +19,23 @@ set :keep_releases, 5
 namespace :deploy do
 
   desc 'Building gems'
-  task :build_gems, :roles => :app do
-      run "cd #{release_path} && bundle install --deployment"
+  task :build_gems do
+    on roles(:app) do |host|
+      within release_path do
+        execute :bundle, "install --deployment"
+      end
+    end
   end
       
   desc "Migrating database"
   task :migrations do
-      run "cd #{release_path} && bundle exec rake db:migrate"
+    on roles(:app), in: :sequence, wait: 5 do
+      # Your restart mechanism here, for example:
+      # execute :touch, release_path.join('tmp/restart.txt')
+      within release_path do
+        execute :rake, "db:migrate"
+      end
+    end 
   end
 
   desc 'Restart application'
@@ -33,8 +43,10 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
-      find_and_execute_task("rackup:stop")
-      find_and_execute_task("rackup:start")
+      within release_path do
+        execute :rake, "web:stop"
+        execute :rake, "web:run"
+      end
     end
   end
 
