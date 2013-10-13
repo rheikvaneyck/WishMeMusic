@@ -14,4 +14,5 @@ end
 group :development, :test do
   gem "sqlite3", "1.3.8"
   gem "rspec", "2.14.0"  
+  gem "capistrano", "~>3.0.0"
 end
