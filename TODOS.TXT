@@ -1,24 +1,24 @@
 - done: create database scheme 
 - done: connect web form with the database
 - done redesign web form
-- optimize database scheme
-	+ create user with admin flag (depends on authentication concept)
-	+ create contact management
-	+ create order management
-- create email generator
-	+ email concept
-	+ link email and order management
+- done: optimize database scheme
+	+ done: create user with admin flag (depends on authentication concept)
+	+ done: create contact management
+	+ done: create order management
+- done: create email generator
+	+ done: email concept
+	+ done: link email and order management
 - write documentation
 	+ document source
 	+ write explanatorily infos
 - add tests
-	+ create spec files
+	+ done: create spec files
 	+ create usecases
-- write a wiki
-	+ base configuration
-	+ how to clone source and use git
+- write a wilki
+	+ done: base configuration
+	+ done: how to clone source and use git
 	+ describe architecture
-	+ how to contribute 
+	+ done: how to contribute 
 - create better web design
 	+ functional layout
 	+ nice layout

@@ -225,6 +225,10 @@ h1{
     border: 1px solid lightgrey;
     color: darkgray;
 }
+input[name=plz] {
+    position: absolute;
+    top: -200px;
+}
 #event_frame ul {
     margin-left: 2em;
     margin-top: 0px;
@@ -275,6 +279,45 @@ h1{
     font-weight: bold;
     font-family: sans-serif;
     font-size: 75%;  
+}
+#confirm_table {
+    margin: 0px;
+    border: 1px solid lightgray;
+    font-size: small;
+    border-collapse: collapse;
+}
+#confirm_table td {
+    line-height: 1.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    border-bottom: 1px dotted #f3f3f3;    
+}
+#confirm_table tr td:first-child {
+    font-weight: bold;
+    width: 45%;
+    vertical-align: top;
+}
+.sub_header {
+    background-color: darkgrey;
+    color: white;
+}
+.colored {
+    color: darkgreen;
+    font-weight: bold;
+}
+.greyed {
+    color: silver;
+}
+
+#choice {
+    padding-top: 2em;
+    text-align: right;
+    height: 3em;
+}
+.confirm_form {
+    float: right;
+    height: 2em;
+    margin-right: 10px; 
 }
   
 a{  
