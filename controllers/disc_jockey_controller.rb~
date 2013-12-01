@@ -66,7 +66,7 @@ class DiscJockeyController < ApplicationController
     @genres = ['Aktuelle Charts', 'POP International', 'POP Deutsch', 'Rock Oldies', 'Rock Modern', 'Rock Deutsch', 'Alternative', 'Soul/Funk', 'Latino', 'House/Techno', 'Hip Hop International', 'Hip Hop Deutsch','World-Musik', 'Kölsches Tön', 'Schlager/NDW', 'Mallorca/Apres-Ski', 'Standard-Tänze']
     @descriptions = {
       @genres[0] => "Das selektiert Beste von heute sowie der letzen Monate...",
-      @genres[1] => "Pop-Hits jenseits der Charts...",
+      @genres[1] => "Pophits jenseits der Charts...",
       @genres[2] => "Die ganz neue deutsche Welle mit Mia, Juli, WirsindHelden...",
       @genres[3] => "Die besten Rocktracks seit den 70er Jahren...",
       @genres[4] => "Aktuelle Rockmusik...",

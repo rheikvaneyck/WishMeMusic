@@ -147,6 +147,9 @@ h1{
     vertical-align: middle;
     padding-top: 5px;
 }
+#dm_image {
+
+}
 .help_icon {
     width: 16px;
     vertical-align: middle;

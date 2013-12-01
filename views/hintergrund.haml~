@@ -14,7 +14,7 @@
           #bg_group
             #bg_radio
               %input{:type=>"radio",:name=>"#{hinter}",:value=>"ok"}
-            #bg_label
+            ##bg_label
               %label #{hinter}
             #bg_image
               %img{:src => 'images/help.png', :class => 'help_icon', :title => "#{@descriptions[hinter]}"}
