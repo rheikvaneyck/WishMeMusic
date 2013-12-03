@@ -56,8 +56,8 @@
               %div{:class => "contact_input"}
                 %input{:type => "text", :name => "dj_start_zeit", :id => "input_dj_start_zeit", :size => "6"}
                 &nbsp;bis:&nbsp;&nbsp;
-                %input{:type => "text", :name => "dj_start_zeit", :id => "input_dj_ende_zeit", :size => "6"}
-          %li
+                %input{:type => "text", :name => "dj_start_zeit", :id => "input_dj_ende_zeit", :size => "6"
+	  %li
             %div{:class=>"contact_box"}
               %div{:class=>"contact_label"}
                 %label{:for => "strasse"} Veranstaltungs Ort, Straße:

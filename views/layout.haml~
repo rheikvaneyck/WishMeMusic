@@ -15,10 +15,10 @@
     #wrapper  
       #header
         %div(id='icon')
-          %img(src='images/dj_pool_cologne_logo.jpg')  
+          %img(src='images/dj_pool_cologne_logo.png')  
         %h1 DJ Pool Köln
         %p
-          hier spielt die music              
+                        
       #main
         #sidebar  
           %ul  

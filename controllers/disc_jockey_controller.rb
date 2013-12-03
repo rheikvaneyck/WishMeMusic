@@ -45,13 +45,13 @@ class DiscJockeyController < ApplicationController
   end
 
   get '/tanzmusik_zeit' do
-    @categories = ["Passt Super", "Geht so", "Ist Ok", "Lieber nicht"]
+    @categories = ["Viel", "Mittel", "Wenig", "Gar Nicht"]
     @times = ['20/30/40er Jahre', '50/60er Jahre', '70er Jahre', '80er Jahre', '90er Jahre', '2000 bis heute']
     haml :tanzmusik_zeit
   end
 
   post '/tanzmusik_zeit' do
-    @categories = ["Passt Super", "Geht so", "Ist Ok", "Lieber nicht"]
+    @categories = ["Viel", "Mittel", "Wenig", "Gar Nicht"]
     @times = ['20/30/40er Jahre', '50/60er Jahre', '70er Jahre', '80er Jahre', '90er Jahre', '2000 bis heute']
     str = []
     params.each do |key, value|
@@ -62,7 +62,7 @@ class DiscJockeyController < ApplicationController
   end
 
   get '/tanzmusik_genre' do
-    @categories = ["Passt Super", "Geht so", "Ist Ok", "Lieber nicht"]
+    @categories = ["Viel", "Mittel", "Wenig", "Gar Nicht"]
     @genres = ['Aktuelle Charts', 'POP International', 'POP Deutsch', 'Rock Oldies', 'Rock Modern', 'Rock Deutsch', 'Alternative', 'Soul/Funk', 'Latino', 'House/Techno', 'Hip Hop International', 'Hip Hop Deutsch','World-Musik', 'Kölsches Tön', 'Schlager/NDW', 'Mallorca/Apres-Ski', 'Standard-Tänze']
     @descriptions = {
       @genres[0] => "Das selektiert Beste von heute sowie der letzen Monate...",
@@ -88,7 +88,7 @@ class DiscJockeyController < ApplicationController
   end
 
   post '/tanzmusik_genre' do
-    @categories = ["Passt Super", "Geht so", "Ist Ok", "Lieber nicht"]
+    @categories = ["Viel", "Mittel", "Wenig", "Gar Nicht"]
     @genres = ['Aktuelle Charts', 'POP International', 'POP Deutsch', 'Rock Oldies', 'Rock Modern', 'Rock Deutsch', 'Alternative', 'Soul/Funk', 'Latino', 'House/Techno', 'Hip Hop International', 'Hip Hop Deutsch','World-Musik', 'Kölsches Tön', 'Schlager/NDW', 'Mallorca/Apres-Ski', 'Standard-Tänze']     
     str = []
     params.each do |key, value|
