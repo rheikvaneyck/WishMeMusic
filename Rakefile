@@ -109,7 +109,16 @@ namespace :web do
   desc "Run the sinatra app"
   task :run do
     # ruby "-Ilib web/run_weather_dash.rb"
-    system("bundle exec rackup -Ilib -s thin -p 4567 -E development -P log/rack.pid config.ru")
+    system("bundle exec rackup -D -Ilib -s thin -p 4567 -E development -P log/rack.pid config.ru")
+  end
+  desc "Stop the sinatra app"
+  task :stop do
+    if File.exists?('log/rack.pid') then
+      pid = File.read('log/rack.pid') 
+      if File.exists?("/proc/#{pid}") then
+        Process::kill("SIGINT", pid)
+      end
+    end
   end
 end
 
