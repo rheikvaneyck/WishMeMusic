@@ -14,6 +14,10 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     builder (3.0.4)
+    capistrano (3.0.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 0.0.23)
     daemons (1.1.9)
     diff-lcs (1.2.4)
     eventmachine (1.0.3)
@@ -24,6 +28,9 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25)
     multi_json (1.7.2)
+    net-scp (1.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.7.0)
     pg (0.15.0)
     polyglot (0.3.3)
     pony (1.5)
@@ -45,11 +52,18 @@ GEM
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
     sqlite3 (1.3.8)
+    sshkit (1.0.0)
+      net-scp
+      net-ssh
+      term-ansicolor
+    term-ansicolor (1.2.2)
+      tins (~> 0.8)
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
     tilt (1.4.1)
+    tins (0.12.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -60,6 +74,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord (= 3.2.9)
+  capistrano (~> 3.0.0)
   haml (= 3.1.7)
   pg (= 0.15.0)
   pony (= 1.5)

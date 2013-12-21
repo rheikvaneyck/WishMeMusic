@@ -1,0 +1,27 @@
+namespace :maintainance do
+  desc "stop rackup server"
+  task :stop do
+    on roles(:app) do |host|
+      within release_path do
+        execute :rake, "web:stop"
+      end
+    end
+  end
+
+  desc "start rackup server"
+  task :start do
+    on roles(:app) do |host|
+      within release_path do
+        execute :rake, "web:run"
+      end
+    end
+  end 
+
+  desc "restart thin server"
+  task :restart do
+    on roles(:app) do |host|
+      stop
+      start
+    end
+  end
+end
