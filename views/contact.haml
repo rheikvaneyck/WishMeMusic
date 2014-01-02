@@ -60,13 +60,19 @@
           %li
             %div{:class=>"contact_box"}
               %div{:class=>"contact_label"}
-                %label{:for => "strasse"} Veranstaltungs Ort, Straße:
+                %label{:for => "ort"} Veranstaltungsort:
+              %div{:class=>"contact_input"}
+                %input{:type => "text", :name => "ort"}
+          %li
+            %div{:class=>"contact_box"}
+              %div{:class=>"contact_label"}
+                %label{:for => "strasse"} Strasse/ Hausnummer:
               %div{:class=>"contact_input"}
                 %input{:type => "text", :name => "strasse"}
           %li
             %div{:class=>"contact_box"}
               %div{:class=>"contact_label"}
-                %label{:for => "stadt"} Veranstaltungs Ort Stadt:
+                %label{:for => "stadt"} PLZ / Stadt:
               %div{:class=>"contact_input"}
                 %input{:type => "text", :name => "stadt"}
                 %input{:type => "text", :name => "plz"}
@@ -81,17 +87,17 @@
               %div{:class=>"contact_label"}
                 %label{:for => "unter20"} Anzahl der Gäste unter 20 Jahren:
               %div{:class=>"contact_input"}
-                %input{:type => "number", :name => "unter20", :value => "0"}
+                %input{:type => "number", :name => "unter20", :value => "0",  :size => "6"}
           %li
             %div{:class=>"contact_box"}
               %div{:class=>"contact_label"}
                 %label{:for => "ueber60"} Anzahl der Gäste über 60 Jahren:
               %div{:class=>"contact_input"}
-                %input{:type => "number", :name => "ueber60", :value => "0"}
+                %input{:type => "number", :name => "ueber60", :value => "0",  :size => "6"}
           %li
             %div{:class=>"contact_box"}
               %div{:class=>"contact_label"}
-                %label{:for => "equipment"} Equipment vorhanden:
+                %label{:for => "equipment"} Ton- & Lichtequipment vorhanden:
               %div{:class=>"contact_input"}
                 %input{:type => "checkbox", :name => "equipment"}
           %li
