@@ -12,7 +12,7 @@
             %th
               #{a}
       %tbody
-        - @times.each do |time|
+        - @times.reverse_each do |time|
           %tr
             %td
               #{time}:
@@ -22,4 +22,4 @@
 
     #confirm
       %input{:type=>"Reset", :class=>"clean_input"}
-      %input{:type=>"Submit", :class=>"clean_input",:value=>"Send"}
+      %input{:type=>"Submit", :class=>"clean_input",:value=>"Weiter"}

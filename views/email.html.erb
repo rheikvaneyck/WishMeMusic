@@ -26,7 +26,7 @@
     		<td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;font-weight: bold;">Event am: </td><td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;"><%= CGI::escape_html("#{@event_date} um #{@event_time} Uhr") %></td>
     	</tr>
         <tr>
-            <td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;font-weight: bold;">Ort: </td><td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;"><%= CGI::escape_html("#{@event.strasse}, #{@event.stadt}") %></td>
+            <td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;font-weight: bold;">Ort: </td><td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;"><%= CGI::escape_html("#{@event.ort}, #{@event.strasse}, #{@event.stadt}") %></td>
         </tr>
         <tr>
             <td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;font-weight: bold;">Anzahl Gäste: </td><td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;"><%= CGI::escape_html("#{@event.anzahl}") %></td>

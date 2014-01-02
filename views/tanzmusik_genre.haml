@@ -11,7 +11,7 @@
     %table{:class => "survey_table"}
       %thead
         %tr
-          %th
+          %th{:colspan => "2"}
           - @categories.each do |a|
             %th
               #{a}
@@ -20,6 +20,7 @@
           %tr
             %td
               #{genre}
+            %td
               %img{:src => 'images/help.png', :align => 'right', :class => 'help_icon', :title => "#{@descriptions[genre]}"}
             - @categories.each do |a|
               %td

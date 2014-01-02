@@ -2,6 +2,7 @@ datum: date    			# Veranstaltungsdatum
 zeit: time   				# Beginn der Veranstaltung
 dj_start_zeit: time	# Ab wann ein DJ auflegen soll
 dj_ende_zeit: time 	# bis wann ein DJ auflegen soll
+ort: string         # Veranstaltungsort - z.B. 'Bürgerhaus'
 strasse: string     # Veranstaltungsort - Strasse
 stadt: string   		# Veranstaltungsort - Stadt
 anzahl: integer    	# Anzahl Gäste
