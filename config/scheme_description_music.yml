@@ -1,0 +1,3 @@
+category: string        # hintergrund,zeit oder genre
+name: string            # "Bar Jazz", "Aktuelles",...
+description: text       # Beschreibung für die Tooltipps

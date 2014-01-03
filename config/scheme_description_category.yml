@@ -1,0 +1,3 @@
+category: string        # wish oder dj
+value:    string        # wish: Viel, Mittel, Wenig, Gar nicht | dj: NoGo, Nix, Mittel, Viel
+score:    integer       # wish: Viel: 3, Mittel: 2, Wenig: 1, Gar nicht: 0 | dj: NoGo 0, Nix: 1, Mittel: 2, Viel: 3
