@@ -7,18 +7,36 @@ end
 describe CollectionPropTester do
 
         before(:all) do
-          class R 
-            attr_accessor :min, :max, :main
-            def initialize(min, max, main)
-              @min = min
-              @max = max
-              @main = main
+          class C 
+            attr_accessor :category, :value, :score
+            def initialize(category, value, score)
+              @min = category
+              @max = value
+              @main = score
             end
           end
-          @coll = [R.new(0,100,50), R.new(0,10,5), R.new(20,40,30)]
+          @categories = [C.new("wish","Viel",3), C.new("wish","Mittel",2), C.new("wish","Wenig", 1)]
+          
+          class M 
+            attr_accessor :category, :name, :description
+            def initialize(category, name, description)
+              @min = category
+              @max = name
+              @main = description
+            end
+          end
+          @music = [
+                  M.new("tanzmusik_genre","Aktuelle Charts",3),
+                  M.new("tanzmusik_genre","POP International",2), 
+                  M.new("tanzmusik_genre","POP Deutsch", 1)
+                  ]
         end
 
-        it "extracts only valid strings for names from input" do
-                expect(collection_item_prop_include?(@coll, :min, 20)).to be_true
+        it "checks if categories collection includes 'Mittel'" do
+                expect(collection_item_prop_include?(@categories, :value, "Mittel")).to be_true
+        end
+        
+        it "checks if music collection includes 'Aktuelle Charts'" do
+                expect(collection_item_prop_include?(@music, :name, "Aktuelle Charts")).to be_true
         end
 end
