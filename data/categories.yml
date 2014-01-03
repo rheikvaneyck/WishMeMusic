@@ -1,0 +1,32 @@
+-
+  category: 'wish'
+  value:  "Viel"
+  score:  3
+-
+  category: 'wish'
+  value:  "Mittel"
+  score:  2
+-
+  category: 'wish'
+  value:  "Wenig"
+  score:  1
+-
+  category: 'wish'
+  value:  "Gar Nicht"
+  score:  0
+-
+  category: 'dj'
+  value:  "Viel"
+  score:  3
+-
+  category: 'dj'
+  value:  "Mittel"
+  score:  2
+-
+  category: 'dj'
+  value:  "Nix"
+  score:  1
+-
+  category: 'dj'
+  value:  "NoGo"
+  score:  0
