@@ -181,6 +181,23 @@ describe StringValidator do
 	# but avoid fake or malicious input
 	before(:all) do
 		@daten = [
+			"Bürgerhaus",
+			"Club 69",
+			"Fete'81"
+		]
+	end
+	it "extracts valid places" do
+		@daten.each do |d|
+			expect(d.filter_purpose(:ort)).to eq(d)
+		end
+	end
+end
+describe StringValidator do
+	# Test for valid street entries
+	# to accept all possible entries users could make 
+	# but avoid fake or malicious input
+	before(:all) do
+		@daten = [
 			"Am Plan 3c",
 			"Hauptstr. 4 1/2",
 			"A-Weg 8"
