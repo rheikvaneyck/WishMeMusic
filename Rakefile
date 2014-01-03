@@ -100,7 +100,7 @@ namespace :db do
       end
     end
     
-    Dir.glob('data/catogories.yml').each do |f|
+    Dir.glob('data/categories.yml').each do |f|
       data = YAML.load_file(f)
       data.each do |d|
         scheme_description_categories.each do |key, value|
@@ -140,7 +140,7 @@ namespace :web do
   desc "Run the sinatra app"
   task :run do
     # ruby "-Ilib web/run_weather_dash.rb"
-    system("bundle exec rackup -D -Ilib -s thin -p 4567 -E development -P log/rack.pid config.ru")
+    system("bundle exec rackup -Ilib -s thin -p 4567 -E development -P log/rack.pid config.ru")
   end
   desc "Stop the sinatra app"
   task :stop do

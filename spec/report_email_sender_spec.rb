@@ -9,7 +9,7 @@ describe ReportMailer do
     config_file = File.join(File.dirname(__FILE__), '..','config','email.yml')
     if File.exists?(config_file) then
       mailer_config = YAML.load_file(config_file)
-      body_html = File.read('email.html')
+      body_html = File.read(File.join(File.dirname(__FILE__), 'email.html'))
       body_text = "WishMeMusic Email Test"
 
       Pony.options = {

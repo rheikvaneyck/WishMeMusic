@@ -23,6 +23,11 @@ sqlite3 ${DB} 'select * from users;'
 sqlite3 ${DB} '.read wishes.sql'
 sqlite3 ${DB} 'select * from wishes;'
 
+[ -f events.sql ] || error_quit "No events.sql file in ${DIR}" 
+
+sqlite3 ${DB} '.read events.sql'
+sqlite3 ${DB} 'select * from events;'
+
 [ -f ${DB} ] && echo "test db successfully created"
 
 popd

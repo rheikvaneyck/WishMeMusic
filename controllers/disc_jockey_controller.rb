@@ -18,54 +18,56 @@ class DiscJockeyController < ApplicationController
   end
 
   get '/hintergrund' do  
-    @hintergr = Music.find(:all, :conditions => [ "category = ?", 'hintergrund']
+    db = DBManager.new
+    @hintergr = Music.find(:all, :conditions => [ "category = ?", 'hintergrund'])
   
     haml :hintergrund
   end
 
   post '/hintergrund' do
-
     params.each do |key, value|
-      if (key == 'Sonstiges') then
-        session[:hintergrund] = params[:hintergrundwunsch]
-      elsif (value == 'ok') then
-        session[:hintergrund] = key
-      end
+      session[:hintergrund] = value
     end
      redirect '/tanzmusik_zeit'
   end
 
   get '/tanzmusik_zeit' do
-    @categories = Category.find(:all, :conditions => [ "category = ?", 'wish']
-    @times = Music.find(:all, :conditions => [ "category = ?", 'zeit']
+    db = DBManager.new
+    @categories = Category.find(:all, :conditions => [ "category = ?", 'wish'])
+    @times = Music.find(:all, :conditions => [ "category = ?", 'tanzmusik_zeit'])
     
     haml :tanzmusik_zeit
   end
 
   post '/tanzmusik_zeit' do
-    @categories = Category.find(:all, :conditions => [ "category = ?", 'wish']
-    @times = Music.find(:all, :conditions => [ "category = ?", 'zeit']
+    db = DBManager.new
+    @categories = Category.find(:all, :conditions => [ "category = ?", 'wish'])
+    @times = Music.find(:all, :conditions => [ "category = ?", 'tanzmusik_zeit'])
     str = []
     params.each do |key, value|
-      str << "#{key}: #{value}" if collection_item_prop_include?(@times, :category, key) and collection_item_prop_include?(@categories, :value, value)
+      str << "#{key}: #{value}" if collection_item_prop_include?(@times, :name, key) and collection_item_prop_include?(@categories, :value, value)
     end
     session[:tanzmusik_zeit] = str.join(";")
     redirect '/tanzmusik_genre'
   end
 
   get '/tanzmusik_genre' do
-    @categories = Category.find(:all, :conditions => [ "category = ?", 'wish']
-    @genres =  Music.find(:all, :conditions => [ "category = ?", 'genre']
+    db = DBManager.new
+    @categories = Category.find(:all, :conditions => [ "category = ?", 'wish'])
+    @genres =  Music.find(:all, :conditions => [ "category = ?", 'tanzmusik_genre'])
        
     haml :tanzmusik_genre
   end
 
   post '/tanzmusik_genre' do
-    @categories = Category.find(:all, :conditions => [ "category = ?", 'wish']
-    @genres =  Music.find(:all, :conditions => [ "category = ?", 'genre']
+    db = DBManager.new
+    @categories = Category.find(:all, :conditions => [ "category = ?", 'wish'])
+    @genres =  Music.find(:all, :conditions => [ "category = ?", 'tanzmusik_genre'])
     str = []
     params.each do |key, value|
-      str << "#{key}: #{value}" if collection_item_prop_include?(@genres, :category, key) and collection_item_prop_include?(@categories, :value, value)
+      logger.info key
+      logger.info value
+      str << "#{key}: #{value}" if collection_item_prop_include?(@genres, :name, key) and collection_item_prop_include?(@categories, :value, value)
     end    
     session[:tanzmusik_genre] = str.join(";")
   	redirect '/kundendaten'
@@ -86,7 +88,6 @@ class DiscJockeyController < ApplicationController
   post '/kundendaten' do
 
     redirect '/' unless params[:plz].empty?
-    logger.info Dir.pwd
     @db = DBManager.new
     # deklare with empty strings
     name = ""
@@ -249,8 +250,9 @@ class DiscJockeyController < ApplicationController
 
     @ms = MatchScore.new(@wish, @djs)
 
+    # FIXME: read this from db
     dj_scale = ["NoGo", "Nix", "Mittel", "Viel"]
-    wish_scale = ["Gar nicht", "Wenig", "Mittel", "Viel"]
+    wish_scale = ["Gar Nicht", "Wenig", "Mittel", "Viel"]
 
     @ms.score(wish_scale, dj_scale)
 

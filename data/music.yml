@@ -53,7 +53,7 @@
 -
   category: tanzmusik_genre
   name: 'Aktuelle Charts'
-  description:"Das selektiert Beste von heute sowie der letzen Monate..."
+  description: "Das selektiert Beste von heute sowie der letzen Monate..."
 -
   category: tanzmusik_genre
   name: 'POP International'
