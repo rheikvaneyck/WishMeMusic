@@ -23,7 +23,7 @@
       %td= CGI::escape_html("#{@event_date} um #{@event_time} Uhr")
     %tr
       %td Ort:
-      %td= CGI::escape_html("#{@event.strasse}, #{@event.stadt}")
+      %td= CGI::escape_html("#{@event.ort}, #{@event.strasse}, #{@event.stadt}")
     %tr
       %td Anzahl der Gäste:
       %td= CGI::escape_html("#{@event.anzahl}")

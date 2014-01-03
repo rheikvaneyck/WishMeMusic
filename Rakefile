@@ -116,7 +116,7 @@ namespace :web do
     if File.exists?('log/rack.pid') then
       pid = File.read('log/rack.pid') 
       if File.exists?("/proc/#{pid}") then
-        Process::kill("SIGINT", pid)
+        Process::kill("SIGINT", pid.to_i)
       end
     end
   end

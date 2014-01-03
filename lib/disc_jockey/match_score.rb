@@ -26,7 +26,7 @@ module DiscJockey
 
     def score(wish_scale = [], dj_scale = [])
       if wish_scale.empty? then
-        @wish_scale = ["Lieber nicht", "Geht so", "Ist OK", "Passt Super"]
+        @wish_scale = ["Gar nicht", "Wenig", "Mittel", "Viel"]
       else
         @wish_scale = wish_scale
       end
@@ -64,7 +64,7 @@ module DiscJockey
 
 
         wish_genre = @wish.tanzmusik_genre.split(";").map {|i| i.split(":")}
-        #puts wish_genre[0].inspect
+        # puts wish_genre[0].inspect
         wish_genre.each do |w|
           idx = favour.tanzmusik_genre.index(w[0])
           unless idx.nil?

@@ -1,7 +1,7 @@
 *~
 *.swp
 bundle/*
-db/*.sqlite
+db/*.sqlite3
 config/database.yml
 config/email.yml
 log/*.log
