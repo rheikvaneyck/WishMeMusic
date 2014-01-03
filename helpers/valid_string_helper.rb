@@ -31,6 +31,9 @@ module ValidStringHelper
 			when :word
 				regexp = %r{\p{Word}+}
 				self.scan(regexp).join("")
+			when :ort
+				regexp = %r{[\p{Word}\p{Digit}\p{Blank}\p{Punct}]+}
+				self.scan(regexp).join("")
 			when :street
 				regexp = %r{[\p{Word}\p{Digit}\p{Blank}\p{Punct}]+}
 				self.scan(regexp).join("")
