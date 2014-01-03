@@ -1,3 +1,4 @@
+from: "admin@server.com"
 to:	"you@exampl.com"
 via:	"smtp"
 address:	"mail.server.com"
