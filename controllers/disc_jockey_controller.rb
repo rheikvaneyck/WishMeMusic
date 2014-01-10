@@ -70,15 +70,15 @@ class DiscJockeyController < ApplicationController
       str << "#{key}: #{value}" if collection_item_prop_include?(@genres, :name, key) and collection_item_prop_include?(@categories, :value, value)
     end    
     session[:tanzmusik_genre] = str.join(";")
-  	redirect '/kundendaten'
+          redirect '/kundendaten'
   end
 
   get '/philosophie' do
-  	haml :philosophie
+          haml :philosophie
   end
 
   get '/referenzen' do
-  	haml :referenzen
+          haml :referenzen
   end
 
   get '/kundendaten' do
@@ -95,6 +95,11 @@ class DiscJockeyController < ApplicationController
     tel = ""
     datum = ""
     zeit = ""
+<<<<<<< HEAD
+    dj_start_time = ""
+    dj_end_time = ""
+=======
+>>>>>>> dd3bb1725a8ce1dc1846636439df089328dbbd8e
     ort = ""
     strasse = ""
     stadt = ""
@@ -115,6 +120,11 @@ class DiscJockeyController < ApplicationController
       tel = params[:tel].filter_purpose(:tel) unless params[:tel].nil?
       datum = params[:datum].filter_purpose(:datum) unless params[:datum].nil?
       zeit = params[:zeit].filter_purpose(:zeit) unless params[:zeit].nil?
+<<<<<<< HEAD
+      dj_start_time = params[:dj_start_time].filter_purpose(:dj_start_time) unless params[:dj_start_time].nil?
+      dj_end_time = params[:dj_end_time].filter_purpose(:dj_end_time) unless params[:dj_end_time].nil?
+=======
+>>>>>>> dd3bb1725a8ce1dc1846636439df089328dbbd8e
       ort = params[:ort].filter_purpose(:ort) unless params[:ort].nil?
       strasse = params[:strasse].filter_purpose(:street) unless params[:strasse].nil?
       stadt = params[:stadt].filter_purpose(:city) unless params[:stadt].nil?
@@ -131,6 +141,11 @@ class DiscJockeyController < ApplicationController
       tel = CGI::escape_html(params[:tel]) unless params[:tel].nil?
       datum = CGI::escape_html(params[:datum]) unless params[:datum].nil?
       zeit = CGI::escape_html(params[:zeit]) unless params[:zeit].nil?
+<<<<<<< HEAD
+      dj_start_time = CGI::escape_html(params[:dj_start_time]) unless params[:dj_start_time].nil?
+      dj_end_time = CGI::escape_html(params[:dj_end_time]) unless params[:dj_end_time].nil?
+=======
+>>>>>>> dd3bb1725a8ce1dc1846636439df089328dbbd8e
       ort = CGI::escape_html(params[:ort]) unless params[:ort].nil?
       strasse = CGI::escape_html(params[:strasse]) unless params[:strasse].nil?
       stadt = CGI::escape_html(params[:stadt]) unless params[:stadt].nil?
