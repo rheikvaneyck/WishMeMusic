@@ -95,11 +95,8 @@ class DiscJockeyController < ApplicationController
     tel = ""
     datum = ""
     zeit = ""
-<<<<<<< HEAD
     dj_start_time = ""
     dj_end_time = ""
-=======
->>>>>>> dd3bb1725a8ce1dc1846636439df089328dbbd8e
     ort = ""
     strasse = ""
     stadt = ""
