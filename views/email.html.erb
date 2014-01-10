@@ -57,15 +57,12 @@
         	<% end %>
         	</tr>
         <% end %>
-    	<tr>
-        	<td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;background-color: darkgrey;color: white;font-weight: bold" colspan="2">Tanzmusik Genre:</td>
-        </tr>
-    	<tr>
-        	<td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;background-color: darkgrey;color: white;font-weight: bold" colspan="2">Tanzmusik Zeit:</td>
+        <tr>
+            <td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;background-color: darkgrey;color: white;font-weight: bold" colspan="2">Tanzmusik Zeit:</td>
         </tr>
         <% @wish.tanzmusik_zeit.split(";").each do |bm| %>
-        	<tr class="list">
-        	<% bm.split(":").each do |m| %>
+            <tr class="list">
+            <% bm.split(":").each do |m| %>
                 <% if (m.strip == "Viel") then %>
                   <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;color: darkgreen;font-weight: bold;'>#{m.strip}</td>" %>
                 <% elsif (m.strip == "Gar Nicht") then %>
@@ -73,9 +70,13 @@
                 <% else %>
                   <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;'>#{CGI::escape_html(m.strip)}</td>" %>
                 <% end %>
-        	<% end %>
-        	</tr>
+            <% end %>
+            </tr>
         <% end %>
+      <tr>
+    	<tr>
+        	<td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;background-color: darkgrey;color: white;font-weight: bold" colspan="2">Tanzmusik Genre:</td>
+        </tr>
         <% @wish.tanzmusik_genre.split(";").each do |bm| %>
             <tr class="list">
             <% bm.split(":").each do |m| %>
@@ -89,7 +90,6 @@
             <% end %>
             </tr>
         <% end %>          
-        <tr>
             <td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;background-color: darkgrey;color: white;font-weight: bold" colspan="2">DJs match:</td>
         </tr>
         <% @ms.djs_match.each do |d| %>
