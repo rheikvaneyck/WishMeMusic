@@ -1,0 +1,120 @@
+-
+  category: hintergrund
+  name: 'Bar Jazz'
+  description: "Leichte, jazzige Musik..."
+-
+  category: hintergrund
+  name: 'Cafe del Mar'
+  description: "Elektronische Klänge..."
+-
+  category: hintergrund
+  name: 'Chanson'
+  description: "Schlager französischen Ursprungs..."
+-
+  category: hintergrund
+  name: 'Klassik'
+  description: "Ausgewählte klassische Stücke (Instrumental)..."
+-
+  category: hintergrund
+  name: 'Kuba'
+  description: "Sommerliche Latinoklänge à la Buena Vista Social Club..."
+-
+  category: hintergrund
+  name: 'Loungin Oldies'
+  description: "Die schönsten Oldies & Evergreens..."
+-
+  category: hintergrund
+  name: 'Aktuelles'
+  description: "Die „ruhigen“ Lieder der letzten Jahre..."
+-
+  category: tanzmusik_zeit
+  name: '20/30/40er Jahre'
+  description: 
+-
+  category: tanzmusik_zeit
+  name: '50/60er Jahre'
+  description: 
+-
+  category: tanzmusik_zeit
+  name: '70er Jahre'
+  description: 
+-
+  category: tanzmusik_zeit
+  name: '80er Jahre'
+  description: 
+-
+  category: tanzmusik_zeit
+  name: '90er Jahre'
+  description: 
+-
+  category: tanzmusik_zeit
+  name: '2000 bis heute'
+  description: 
+-
+  category: tanzmusik_genre
+  name: 'Aktuelle Charts'
+  description: "Das selektiert Beste von heute sowie der letzen Monate..."
+-
+  category: tanzmusik_genre
+  name: 'POP International'
+  description: "Pop-Hits jenseits der Charts..."
+-
+  category: tanzmusik_genre
+  name: 'POP Deutsch'
+  description: "Die ganz neue deutsche Welle mit Mia, Juli, WirsindHelden..."
+-
+  category: tanzmusik_genre
+  name: 'Rock Oldies'
+  description: "Die besten Rocktracks seit den 70er Jahren..."
+-
+  category: tanzmusik_genre
+  name: 'Rock Modern'
+  description: "Aktuelle Rockmusik..."
+-
+  category: tanzmusik_genre
+  name: 'Rock Deutsch'
+  description: "Deutsche Rockmusiker mit zumeist deutschen Texte..."
+-
+  category: tanzmusik_genre
+  name: 'Alternative'
+  description: "Alternative Pop- & Rockmusik jenseits der Charts..."
+-
+  category: tanzmusik_genre
+  name: 'Soul/Funk'
+  description: "Von Motown über Jackson bis Amy Winehouse..."
+-
+  category: tanzmusik_genre
+  name: 'Latino'
+  description: "Von La Bamba zu Gloria Estefan über Shakira hin zu Mr. Saxobeat..."
+-
+  category: tanzmusik_genre
+  name: 'House/Techno'
+  description: "Von Insomnia & Safri Duo bis zum heutigen Dancefloor..."
+-
+  category: tanzmusik_genre
+  name: 'Hip Hop International'
+  description: "vom 80er Hiphop bis heute zu Rihanna & Co..."
+-
+  category: tanzmusik_genre
+  name: 'Hip Hop Deutsch'
+  description: "Von den Fanta4 über JanDelay & Seeed bis hin zu Cro..."
+-
+  category: tanzmusik_genre
+  name: 'World-Musik'
+  description: "Musik aus anderen Kulturen..."
+-
+  category: tanzmusik_genre
+  name: 'Kölsches Tön'
+  description: "Von Bap&Brings bis Karneval..."
+-
+  category: tanzmusik_genre
+  name: 'Schlager/NDW'
+  description: "Die guten alten Schlager kombiniert mit den Hits der NDW..."
+-
+  category: tanzmusik_genre
+  name: 'Mallorca/Apres-Ski'
+  description: "Aktuelle Musik aus dem Urlaub; nicht jedermanns Sache..."
+-
+  category: tanzmusik_genre
+  name: 'Standard-Tänze' 
+  description: "Neben einem möglichen Eröffnungswalzer sollen auch die Standard-Tänzer nicht zu kurz kommen, wenn vorhanden..."

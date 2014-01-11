@@ -11,19 +11,20 @@
     %table{:class => "survey_table"}
       %thead
         %tr
-          %th
+          %th{:colspan => "2"}
           - @categories.each do |a|
             %th
-              #{a}
+              #{a.value}
       %tbody
         - @genres.each do |genre|
           %tr
             %td
-              #{genre}
-              %img{:src => 'images/help.png', :align => 'right', :class => 'help_icon', :title => "#{@descriptions[genre]}"}
+              #{genre.name}
+            %td
+              %img{:src => 'images/help.png', :align => 'right', :class => 'help_icon', :title => "#{genre.description}"}
             - @categories.each do |a|
               %td
-                %input{:type=>"radio",:name=>"#{genre}",:value=>"#{a}", :checked => a == "Lieber nicht"} 
+                %input{:type=>"radio",:name=>"#{genre.name}",:value=>"#{a.value}", :checked => a.value == "Gar Nicht"} 
 
     #confirm
       %input{:type=>"Reset", :class=>"clean_input"}

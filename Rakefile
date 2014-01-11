@@ -79,7 +79,38 @@ namespace :db do
 
     end
   end
+  
+  desc "Load categories and descriptions into the database"
+  task :load_categories => :environment do
+    scheme_description_music = YAML.load_file(File.join('config','scheme_description_music.yml'))
+    scheme_description_categories = YAML.load_file(File.join('config','scheme_description_category.yml'))
 
+    class Music < ActiveRecord::Base
+    end
+    class Category < ActiveRecord::Base
+    end
+
+    Dir.glob('data/music.yml').each do |f|
+      data = YAML.load_file(f)
+      data.each do |d|
+        scheme_description_music.each do |key, value|
+          scheme_description_music[key] = d[key]
+        end
+        @m = Music.create scheme_description_music
+      end
+    end
+    
+    Dir.glob('data/categories.yml').each do |f|
+      data = YAML.load_file(f)
+      data.each do |d|
+        scheme_description_categories.each do |key, value|
+          scheme_description_categories[key] = d[key]
+        end
+        @c = Category.create scheme_description_categories
+      end
+    end
+  end
+  
   task :environment do
     if (ENV['DATABASE_URL']) then
       db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/app-dev')
@@ -109,7 +140,7 @@ namespace :web do
   desc "Run the sinatra app"
   task :run do
     # ruby "-Ilib web/run_weather_dash.rb"
-    system("bundle exec rackup -D -Ilib -s thin -p 4567 -E development -P log/rack.pid config.ru")
+    system("bundle exec rackup -Ilib -s thin -p 4567 -E development -P log/rack.pid config.ru")
   end
   desc "Stop the sinatra app"
   task :stop do

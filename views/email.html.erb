@@ -26,7 +26,7 @@
     		<td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;font-weight: bold;">Event am: </td><td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;"><%= CGI::escape_html("#{@event_date} um #{@event_time} Uhr") %></td>
     	</tr>
         <tr>
-            <td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;font-weight: bold;">Ort: </td><td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;"><%= CGI::escape_html("#{@event.strasse}, #{@event.stadt}") %></td>
+            <td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;font-weight: bold;">Ort: </td><td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;"><%= CGI::escape_html("#{@event.ort}, #{@event.strasse}, #{@event.stadt}") %></td>
         </tr>
         <tr>
             <td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;font-weight: bold;">Anzahl Gäste: </td><td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;"><%= CGI::escape_html("#{@event.anzahl}") %></td>
@@ -57,39 +57,39 @@
         	<% end %>
         	</tr>
         <% end %>
+        <tr>
+            <td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;background-color: darkgrey;color: white;font-weight: bold" colspan="2">Tanzmusik Zeit:</td>
+        </tr>
+        <% @wish.tanzmusik_zeit.split(";").each do |bm| %>
+            <tr class="list">
+            <% bm.split(":").each do |m| %>
+                <% if (m.strip == "Viel") then %>
+                  <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;color: darkgreen;font-weight: bold;'>#{m.strip}</td>" %>
+                <% elsif (m.strip == "Gar Nicht") then %>
+                    <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;color: silver;'>#{m.strip}</td>" %>
+                <% else %>
+                  <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;'>#{CGI::escape_html(m.strip)}</td>" %>
+                <% end %>
+            <% end %>
+            </tr>
+        <% end %>
+      <tr>
     	<tr>
         	<td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;background-color: darkgrey;color: white;font-weight: bold" colspan="2">Tanzmusik Genre:</td>
         </tr>
         <% @wish.tanzmusik_genre.split(";").each do |bm| %>
-        	<tr class="list">
-        	<% bm.split(":").each do |m| %>
-                <% if (m.strip == "Passt Super") then %>
-        		  <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;color: darkgreen;font-weight: bold;'>#{m.strip}</td>" %>
-                <% elsif (m.strip == "Lieber nicht") then %>
-                    <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;color: silver;'>#{m.strip}</td>" %>
-                <% else %>
-                  <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;'>#{CGI::escape_html(m.strip)}</td>" %>
-                <% end %>
-        	<% end %>
-        	</tr>
-        <% end %>
-    	<tr>
-        	<td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;background-color: darkgrey;color: white;font-weight: bold" colspan="2">Tanzmusik Zeit:</td>
-        </tr>
-        <% @wish.tanzmusik_zeit.split(";").each do |bm| %>
-        	<tr class="list">
-        	<% bm.split(":").each do |m| %>
-                <% if (m.strip == "Passt Super") then %>
+            <tr class="list">
+            <% bm.split(":").each do |m| %>
+                <% if (m.strip == "Viel") then %>
                   <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;color: darkgreen;font-weight: bold;'>#{m.strip}</td>" %>
-                <% elsif (m.strip == "Lieber nicht") then %>
+                <% elsif (m.strip == "Gar Nicht") then %>
                     <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;color: silver;'>#{m.strip}</td>" %>
                 <% else %>
                   <%= "<td style='line-height: 1.3em;padding-left: 2em;padding-right: 2em;'>#{CGI::escape_html(m.strip)}</td>" %>
                 <% end %>
-        	<% end %>
-        	</tr>
-        <% end %>  
-        <tr>
+            <% end %>
+            </tr>
+        <% end %>          
             <td style="line-height: 1.3em;padding-left: 2em;padding-right: 2em;background-color: darkgrey;color: white;font-weight: bold" colspan="2">DJs match:</td>
         </tr>
         <% @ms.djs_match.each do |d| %>

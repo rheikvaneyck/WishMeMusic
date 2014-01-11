@@ -17,7 +17,7 @@ namespace :maintainance do
     end
   end 
 
-  desc "restart thin server"
+  desc "restart rackup server"
   task :restart do
     on roles(:app) do |host|
       stop

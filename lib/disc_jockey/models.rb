@@ -10,7 +10,7 @@ require 'logger'
 
 module DiscJockey
   class DBManager
-    def initialize(config_path='config')
+    def initialize(config_path=File.expand_path('../../../config', __FILE__))
       if (ENV['DATABASE_URL']) then
         db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/app-dev')
         db_config = {
@@ -25,10 +25,11 @@ module DiscJockey
         }
       elsif (ENV['PRODUCTION']) then
         db_config = YAML::load(File.open(File.join(config_path,'database.yml')))['production']
-        ActiveRecord::Base.logger = Logger.new(File.open(File.join('log','database.log'), 'a'))
+        ActiveRecord::Base.logger = Logger.new(File.open(File.join(File.expand_path('../../../log', __FILE__),'database.log'), 'a'))
       else
         db_config = YAML::load(File.open(File.join(config_path,'database.yml')))['development']
-        ActiveRecord::Base.logger = Logger.new(File.open(File.join('log','database.log'), 'a'))
+        db_config['database'] = File.expand_path("../../../#{db_config['database']}", __FILE__)
+        ActiveRecord::Base.logger = Logger.new(File.open(File.join(File.expand_path('../../../log', __FILE__),'database.log'), 'a'))
       end
       ActiveRecord::Base.establish_connection(db_config)
     end

@@ -10,16 +10,16 @@
           %th
           - @categories.each do |a|
             %th
-              #{a}
+              #{a.value}
       %tbody
         - @times.each do |time|
           %tr
             %td
-              #{time}:
+              #{time.name}:
             - @categories.each do |a|
               %td
-                %input{:type=>"radio",:name=>"#{time}",:value=>"#{a}", :checked => a == "Lieber nicht"}  
+                %input{:type=>"radio",:name=>"#{time.name}",:value=>"#{a.value}", :checked => a.value == "Gar Nicht"}  
 
     #confirm
       %input{:type=>"Reset", :class=>"clean_input"}
-      %input{:type=>"Submit", :class=>"clean_input",:value=>"Send"}
+      %input{:type=>"Submit", :class=>"clean_input",:value=>"Weiter"}

@@ -252,7 +252,7 @@ input[name=plz] {
     clear: both;
 }
 .contact_label {
-    width: 18em;
+    width: 20em;
     float: left;
 }
 .contact_input {
@@ -266,7 +266,7 @@ input[name=plz] {
     background: -moz-linear-gradient(top,  #eee,  #ffffff);  
 }
 .contact_input textarea {
-    font-size: 1em;
+    /* font-size: 1em; */
     border: 1px solid silver;
     border-radius: 3px;
     background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ffffff));  

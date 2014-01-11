@@ -18,92 +18,67 @@ class DiscJockeyController < ApplicationController
   end
 
   get '/hintergrund' do  
-    @hintergr = ['Bar Jazz','Cafe del Mar', 'Chanson', 'Klassik', 'Kuba', 'Loungin Oldies', 'Aktuelles']
-    @descriptions = {
-      @hintergr[0] => "Leichte, jazzige Musik...",
-      @hintergr[1] => "Elektronische Klänge...",
-      @hintergr[2] => "Schlager französischen Ursprungs...",
-      @hintergr[3] => "Ausgewählte klassische Stücke (Instrumental)...",
-      @hintergr[4] => "Sommerliche Latinoklänge à la Buena Vista Social Club...",
-      @hintergr[5] => "Die schönsten Oldies & Evergreens...",
-      @hintergr[6] => "Die „ruhigen“ Lieder der letzten Jahre..."
-    }
-
+    db = DBManager.new
+    @hintergr = Music.find(:all, :conditions => [ "category = ?", 'hintergrund'])
+  
     haml :hintergrund
   end
 
   post '/hintergrund' do
-
     params.each do |key, value|
-      if (key == 'Sonstiges') then
-        session[:hintergrund] = params[:hintergrundwunsch]
-      elsif (value == 'ok') then
-        session[:hintergrund] = key
-      end
+      session[:hintergrund] = value
     end
      redirect '/tanzmusik_zeit'
   end
 
   get '/tanzmusik_zeit' do
-    @categories = ["Viel", "Mittel", "Wenig", "Gar Nicht"]
-    @times = ['20/30/40er Jahre', '50/60er Jahre', '70er Jahre', '80er Jahre', '90er Jahre', '2000 bis heute']
+    db = DBManager.new
+    @categories = Category.find(:all, :conditions => [ "category = ?", 'wish'])
+    @times = Music.find(:all, :conditions => [ "category = ?", 'tanzmusik_zeit'])
+    
     haml :tanzmusik_zeit
   end
 
   post '/tanzmusik_zeit' do
-    @categories = ["Viel", "Mittel", "Wenig", "Gar Nicht"]
-    @times = ['20/30/40er Jahre', '50/60er Jahre', '70er Jahre', '80er Jahre', '90er Jahre', '2000 bis heute']
+    db = DBManager.new
+    @categories = Category.find(:all, :conditions => [ "category = ?", 'wish'])
+    @times = Music.find(:all, :conditions => [ "category = ?", 'tanzmusik_zeit'])
     str = []
     params.each do |key, value|
-      str << "#{key}: #{value}" if @times.include?(key) and @categories.include?(value)
+      str << "#{key}: #{value}" if collection_item_prop_include?(@times, :name, key) and collection_item_prop_include?(@categories, :value, value)
     end
     session[:tanzmusik_zeit] = str.join(";")
     redirect '/tanzmusik_genre'
   end
 
   get '/tanzmusik_genre' do
-    @categories = ["Viel", "Mittel", "Wenig", "Gar Nicht"]
-    @genres = ['Aktuelle Charts', 'POP International', 'POP Deutsch', 'Rock Oldies', 'Rock Modern', 'Rock Deutsch', 'Alternative', 'Soul/Funk', 'Latino', 'House/Techno', 'Hip Hop International', 'Hip Hop Deutsch','World-Musik', 'Kölsches Tön', 'Schlager/NDW', 'Mallorca/Apres-Ski', 'Standard-Tänze']
-    @descriptions = {
-      @genres[0] => "Das selektiert Beste von heute sowie der letzen Monate...",
-      @genres[1] => "Pop-Hits jenseits der Charts...",
-      @genres[2] => "Die ganz neue deutsche Welle mit Mia, Juli, WirsindHelden...",
-      @genres[3] => "Die besten Rocktracks seit den 70er Jahren...",
-      @genres[4] => "Aktuelle Rockmusik...",
-      @genres[5] => "Deutsche Rockmusiker mit zumeist deutschen Texte...",
-      @genres[6] => "Alternative Pop- & Rockmusik jenseits der Charts...",
-      @genres[7] => "Von Motown über Jackson bis Amy Winehouse...",
-      @genres[8] => "Von La Bamba zu Gloria Estefan über Shakira hin zu Mr. Saxobeat...",
-      @genres[9] => "Von Insomnia & Safri Duo bis zum heutigen Dancefloor...",
-      @genres[10] => "vom 80er Hiphop bis heute zu Rihanna & Co...",
-      @genres[11] => "Von den Fanta4 über JanDelay & Seeed bis hin zu Cro...",
-      @genres[12] => "Musik aus anderen Kulturen...",
-      @genres[13] => "Von Bap&Brings bis Karneval...",
-      @genres[14] => "Die guten alten Schlager kombiniert mit den Hits der NDW...",
-      @genres[15] => "Aktuelle Musik aus dem Urlaub; nicht jedermanns Sache...",
-      @genres[16] => "Neben einem möglichen Eröffnungswalzer sollen auch die Standard-Tänzer nicht zu kurz kommen, wenn vorhanden..."
-      
-    }     
+    db = DBManager.new
+    @categories = Category.find(:all, :conditions => [ "category = ?", 'wish'])
+    @genres =  Music.find(:all, :conditions => [ "category = ?", 'tanzmusik_genre'])
+       
     haml :tanzmusik_genre
   end
 
   post '/tanzmusik_genre' do
-    @categories = ["Viel", "Mittel", "Wenig", "Gar Nicht"]
-    @genres = ['Aktuelle Charts', 'POP International', 'POP Deutsch', 'Rock Oldies', 'Rock Modern', 'Rock Deutsch', 'Alternative', 'Soul/Funk', 'Latino', 'House/Techno', 'Hip Hop International', 'Hip Hop Deutsch','World-Musik', 'Kölsches Tön', 'Schlager/NDW', 'Mallorca/Apres-Ski', 'Standard-Tänze']     
+    db = DBManager.new
+    @categories = Category.find(:all, :conditions => [ "category = ?", 'wish'])
+    @genres =  Music.find(:all, :conditions => [ "category = ?", 'tanzmusik_genre'])
     str = []
     params.each do |key, value|
-      str << "#{key}: #{value}" if @genres.include?(key) and @categories.include?(value)
+      logger.info key
+      logger.info value
+      str << "#{key}: #{value}" if collection_item_prop_include?(@genres, :name, key) and collection_item_prop_include?(@categories, :value, value)
     end    
     session[:tanzmusik_genre] = str.join(";")
-  	redirect '/kundendaten'
+          redirect '/kundendaten'
   end
 
   get '/philosophie' do
-  	haml :philosophie
+          haml :philosophie
   end
 
   get '/referenzen' do
-  	haml :referenzen
+          haml :referenzen
   end
 
   get '/kundendaten' do
@@ -113,7 +88,6 @@ class DiscJockeyController < ApplicationController
   post '/kundendaten' do
 
     redirect '/' unless params[:plz].empty?
-
     @db = DBManager.new
     # deklare with empty strings
     name = ""
@@ -121,6 +95,9 @@ class DiscJockeyController < ApplicationController
     tel = ""
     datum = ""
     zeit = ""
+    dj_start_time = ""
+    dj_end_time = ""
+    ort = ""
     strasse = ""
     stadt = ""
     anzahl = ""
@@ -140,6 +117,9 @@ class DiscJockeyController < ApplicationController
       tel = params[:tel].filter_purpose(:tel) unless params[:tel].nil?
       datum = params[:datum].filter_purpose(:datum) unless params[:datum].nil?
       zeit = params[:zeit].filter_purpose(:zeit) unless params[:zeit].nil?
+      dj_start_time = params[:dj_start_time].filter_purpose(:dj_start_time) unless params[:dj_start_time].nil?
+      dj_end_time = params[:dj_end_time].filter_purpose(:dj_end_time) unless params[:dj_end_time].nil?
+      ort = params[:ort].filter_purpose(:ort) unless params[:ort].nil?
       strasse = params[:strasse].filter_purpose(:street) unless params[:strasse].nil?
       stadt = params[:stadt].filter_purpose(:city) unless params[:stadt].nil?
       anzahl = params[:anzahl].filter_purpose(:numbers) unless params[:anzahl].nil?
@@ -155,6 +135,9 @@ class DiscJockeyController < ApplicationController
       tel = CGI::escape_html(params[:tel]) unless params[:tel].nil?
       datum = CGI::escape_html(params[:datum]) unless params[:datum].nil?
       zeit = CGI::escape_html(params[:zeit]) unless params[:zeit].nil?
+      dj_start_time = CGI::escape_html(params[:dj_start_time]) unless params[:dj_start_time].nil?
+      dj_end_time = CGI::escape_html(params[:dj_end_time]) unless params[:dj_end_time].nil?
+      ort = CGI::escape_html(params[:ort]) unless params[:ort].nil?
       strasse = CGI::escape_html(params[:strasse]) unless params[:strasse].nil?
       stadt = CGI::escape_html(params[:stadt]) unless params[:stadt].nil?
       anzahl = CGI::escape_html(params[:anzahl]) unless params[:anzahl].nil?
@@ -188,6 +171,7 @@ class DiscJockeyController < ApplicationController
     @er = Event.new do |r|
       r.datum = datum
       r.zeit = zeit
+      r.ort = ort
       r.strasse = strasse
       r.stadt = stadt
       r.anzahl = anzahl
@@ -272,15 +256,16 @@ class DiscJockeyController < ApplicationController
 
     @ms = MatchScore.new(@wish, @djs)
 
+    # FIXME: read this from db
     dj_scale = ["NoGo", "Nix", "Mittel", "Viel"]
-    wish_scale = ["Lieber nicht", "Geht so", "Ist OK", "Passt Super"]
+    wish_scale = ["Gar Nicht", "Wenig", "Mittel", "Viel"]
 
     @ms.score(wish_scale, dj_scale)
 
-    erb = ERB.new(File.read("web/views/email.html.erb"))
+    erb = ERB.new(File.read(File.expand_path('../../views/email.html.erb', __FILE__)))
     body_html =  erb.result(binding)
 
-    mailer_config = YAML.load_file(File.join('config','email.yml'))
+    mailer_config = YAML.load_file(File.join(File.expand_path('../../config', __FILE__),'email.yml'))
 
     Pony.options = {
       :via =>  mailer_config["via"],

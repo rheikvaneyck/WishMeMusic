@@ -25,11 +25,20 @@ module ValidStringHelper
 			when :zeit
 				regexp = %r{\p{Digit}{1,2}[\.:\p{Pd}\/]?\p{Digit}{0,2}}
 				self.scan(regexp).join("")
+			when :dj_start_time
+				regexp = %r{\p{Digit}{1,2}[\.:\p{Pd}\/]?\p{Digit}{0,2}}
+				self.scan(regexp).join("")
+			when :dj_end_time
+				regexp = %r{\p{Digit}{1,2}[\.:\p{Pd}\/]?\p{Digit}{0,2}}
+				self.scan(regexp).join("")
 			when :numbers
 				regexp = %r{\p{Digit}+}
 				self.scan(regexp).join("")
 			when :word
 				regexp = %r{\p{Word}+}
+				self.scan(regexp).join("")
+			when :ort
+				regexp = %r{[\p{Word}\p{Digit}\p{Blank}\p{Punct}]+}
 				self.scan(regexp).join("")
 			when :street
 				regexp = %r{[\p{Word}\p{Digit}\p{Blank}\p{Punct}]+}
