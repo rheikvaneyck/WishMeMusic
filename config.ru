@@ -1,13 +1,8 @@
 require 'sinatra/base'
-require './helpers/application_helper.rb'
-require './helpers/valid_string_helper.rb'
-require './helpers/collection_helper.rb'
-require './controllers/application_controller'
-require './controllers/disc_jockey_controller'
+require File.expand_path '../helpers/application_helper.rb', __FILE__
+require File.expand_path '../helpers/valid_string_helper.rb', __FILE__
+require File.expand_path '../helpers/collection_helper.rb', __FILE__
+require File.expand_path '../controllers/application_controller', __FILE__
+require File.expand_path '../controllers/disc_jockey_controller', __FILE__
 
-map('/') { 
-  logger = Logger.new('log/app.log')
-
-  use Rack::CommonLogger, logger
-  run DiscJockeyController 
-}
+run DiscJockeyController 

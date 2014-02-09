@@ -2,9 +2,8 @@ source "http://rubygems.org"
 gem "rake", "10.1.0"
 gem "activerecord", "3.2.9"
 gem "sinatra", "1.4.3"
-gem "rack", "1.5.2"
 gem "haml", "3.1.7"
-gem "thin", "1.5.0"
+gem "unicorn", "4.8.1"
 gem "pony", "1.5"
 
 group :production do
