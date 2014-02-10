@@ -10,3 +10,4 @@ data/*
 tmp/
 rneux.sublime-project
 rneux.sublime-workspace
+.ruby-version

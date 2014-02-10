@@ -3,7 +3,7 @@ require 'fileutils'
 # note the trailing slash in this example
 @dir = File.expand_path(File.dirname(__FILE__))
 
-worker_processes 2
+worker_processes 1
 working_directory @dir
 
 timeout 30

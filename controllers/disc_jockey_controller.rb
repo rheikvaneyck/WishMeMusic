@@ -184,13 +184,14 @@ class DiscJockeyController < ApplicationController
       r.wish_id = @w.id
     end
     @er.save
-    
+    # logger.info "creator's event id: #{@er.id}" 
     session[:event_id] = @er.id
 
     redirect "/confirm"
   end
 
   get '/confirm' do
+    # logger.info "session's event id: #{session[:event_id]}"
     @id = session[:event_id]
 
     unless @id.nil? then
@@ -268,19 +269,25 @@ class DiscJockeyController < ApplicationController
     mailer_config = YAML.load_file(File.join(File.expand_path('../../config', __FILE__),'email.yml'))
 
     Pony.options = {
+      :from => mailer_config["from"],
       :via =>  mailer_config["via"],
-      :address => mailer_config["address"],
-      :port => mailer_config["port"],
-      :enable_starttls_auto => mailer_config["enable_starttls_auto"],
-      :user_name => mailer_config["user_name"],
-      :password => mailer_config["password"],
-      :authentication => mailer_config["authentication"],
-      :domain => mailer_config["domain"]
+      :via_options => {
+        :address => mailer_config["address"],
+        :port => mailer_config["port"],
+        :enable_starttls_auto => mailer_config["enable_starttls_auto"],
+        :user_name => mailer_config["user_name"],
+        :password => mailer_config["password"],
+        :authentication => mailer_config["authentication"],
+        :domain => mailer_config["domain"]
+      }
     }
+    
+    logger.info "mail to: #{mailer_config['to']}"
+    logger.info "mail to: #{mailer_config['via']}"
+    logger.info "mail to: #{mailer_config['address']}"
 
     Pony.mail(:to => mailer_config["to"], 
       :cc => mailer_config["cc"], 
-      :from => mailer_config["from"],
       :subject => "WishMeMusic Event Report", 
       :content_type => "text/html",
       :body => body_html)
