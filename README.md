@@ -15,6 +15,13 @@ Screenshot
 ![Screenshot](wishmemusic_screen.png)
 
 
+Dependencies
+------------
+
+* mysql-Server
+* Web-Server (e.g. nginx, apache)
+* memcache
+
 License
 -------
 

@@ -3,7 +3,8 @@ class ApplicationController < Sinatra::Base
 	helpers ValidStringHelper
 	helpers CollectionHelper
 
-	enable :sessions
+	disable :sessions
+	use Rack::Session::Dalli, :cache => Dalli::Client.new
 
 	set :views, File.expand_path('../../views', __FILE__)
   	set :public_folder, File.expand_path('../../public', __FILE__)

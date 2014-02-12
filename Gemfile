@@ -1,5 +1,7 @@
 source "http://rubygems.org"
 gem "rake", "10.1.0"
+gem "rack", "1.5.2"
+gem "dalli", "2.7.0"
 gem "activerecord", "3.2.9"
 gem "sinatra", "1.4.3"
 gem "haml", "3.1.7"
