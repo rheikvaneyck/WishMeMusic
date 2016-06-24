@@ -112,26 +112,29 @@ namespace :db do
   end
   
   task :environment do
-    if (ENV['DATABASE_URL']) then
-      db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/app-dev')
-      db_config = {
-        :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
-        :host     => db.host,
-        :port     => db.port,
-        :username => db.user,
-        :password => db.password,
-        :database => db.path[1..-1],
-        :encoding => 'utf8',
-      }
-    elsif (ENV['PRODUCTION']) then
-      db_config = YAML::load(File.open(File.join('config','database.yml')))['production']
-      Dir.mkdir('log') unless Dir.exists?('log')
-      ActiveRecord::Base.logger = Logger.new(File.open(File.join('log','database.log'), 'a'))
-    else
-      db_config = YAML::load(File.open(File.join('config','database.yml')))['development']
-      Dir.mkdir('log') unless Dir.exists?('log')
-      ActiveRecord::Base.logger = Logger.new(File.open(File.join('log','database.log'), 'a'))
-    end
+#    if (ENV['DATABASE_URL']) then
+#      db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/app-dev')
+#      db_config = {
+#        :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
+#        :host     => db.host,
+#        :port     => db.port,
+#        :username => db.user,
+#        :password => db.password,
+#        :database => db.path[1..-1],
+#        :encoding => 'utf8',
+#      }
+#    elsif (ENV['PRODUCTION']) then
+#      db_config = YAML::load(File.open(File.join('config','database.yml')))['production']
+#      Dir.mkdir('log') unless Dir.exists?('log')
+#      ActiveRecord::Base.logger = Logger.new(File.open(File.join('log','database.log'), 'a'))
+#    else
+#      db_config = YAML::load(File.open(File.join('config','database.yml')))['development']
+#      Dir.mkdir('log') unless Dir.exists?('log')
+#      ActiveRecord::Base.logger = Logger.new(File.open(File.join('log','database.log'), 'a'))
+#    end
+    db_config = YAML::load(File.open(File.join('config','database.yml')))['production']
+    Dir.mkdir('log') unless Dir.exists?('log')
+    ActiveRecord::Base.logger = Logger.new(File.open(File.join('log','database.log'), 'a'))
     ActiveRecord::Base.establish_connection(db_config)
   end 
 end  
@@ -139,8 +142,8 @@ end
 namespace :web do
   desc "Run the sinatra app"
   task :run do
-    # ruby "-Ilib web/run_weather_dash.rb"
-    system("bundle exec unicorn -c unicorn.rb -Ilib -E development -D")
+    #system("bundle exec unicorn -c unicorn.rb -Ilib -E development -D")
+    %x[rackup -p 4567 -I lib]
   end
   desc "Stop the sinatra app"
   task :stop do
