@@ -27,7 +27,7 @@ module DiscJockey
         db_config = YAML::load(File.open(File.join(config_path,'database.yml')))['production']
         ActiveRecord::Base.logger = Logger.new(File.open(File.join(File.expand_path('../../../log', __FILE__),'database.log'), 'a'))
       else
-        db_config = YAML::load(File.open(File.join(config_path,'database.yml')))['development']
+        db_config = YAML::load(File.open(File.join(config_path,'database.yml')))['production']
         db_config['database'] = File.expand_path("../../../#{db_config['database']}", __FILE__)
         ActiveRecord::Base.logger = Logger.new(File.open(File.join(File.expand_path('../../../log', __FILE__),'database.log'), 'a'))
       end

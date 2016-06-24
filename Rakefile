@@ -143,12 +143,13 @@ namespace :web do
   desc "Run the sinatra app"
   task :run do
     #system("bundle exec unicorn -c unicorn.rb -Ilib -E development -D")
-    %x[rackup -p 4567 -I lib]
+    # %x[rackup -p 4567 -I lib -s thin -D -p tmp/pids/thin.pid]
+    %x[rackup -p 4567 -I lib ]
   end
   desc "Stop the sinatra app"
   task :stop do
-    if File.exists?('tmp/pids/unicorn.pid') then
-      @pid = File.read('tmp/pids/unicorn.pid').strip
+    if File.exists?('tmp/pids/thin.pid') then
+      @pid = File.read('tmp/pids/thin.pid').strip
       if File.exists?("/proc/#{@pid}") then
         Process::kill("SIGINT", @pid.to_i)
       end
